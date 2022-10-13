@@ -1,0 +1,100 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --inter-font: 'Inter', sans-serif;
+    --medium-red: #D0284A;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-image: url("../images/background_login.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter';
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 700px;
+    min-height: 70vh;
+    background-color: whitesmoke;
+    box-shadow: 5px 8px 8px black;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Inter';
+}
+
+.logo {
+    margin-top: 80px;
+    width: 100%;
+    max-width: 300px
+}
+
+.login {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login label {
+    width: 100%;
+    margin-block: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputIcon {
+    height: 40px;
+    width: 40px;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 5px 0 0 5px;
+}
+
+.inputLogin {
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+    padding-inline: 10px;
+    border: 1px solid black;
+    border-radius: 0 5px 5px 0;
+}
+
+.login a {
+    font-size: 15px;
+    color: #D0284A;
+    font-style: none;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login a:hover {
+    color: var(--medium-red);
+}
+
+.login button{
+    margin-top: 30px;
+    width: 100%;
+    max-width: 150px;
+    min-height: 40px;
+    background-color: var(--medium-red);
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+    border: none;
+    border-radius: 10px;
+}
