@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbTodaHoraModelStoreContainer" CdmEntityContainer="dbTodaHoraEntities">
+    <EntitySetMapping Name="Pessoa">
+      <EntityTypeMapping TypeName="dbTodaHoraModel.Pessoa">
+        <MappingFragment StoreEntitySet="Pessoa">
+          <ScalarProperty Name="Pessoa_Id" ColumnName="Pessoa_Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Sobrenome" ColumnName="Sobrenome" />
+          <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+          <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="dbTodaHoraModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+          <ScalarProperty Name="Data_Inclusao" ColumnName="Data_Inclusao" />
+          <ScalarProperty Name="blnAtivo" ColumnName="blnAtivo" />
+          <ScalarProperty Name="blnAdmin" ColumnName="blnAdmin" />
+          <ScalarProperty Name="Data_alteracao" ColumnName="Data_alteracao" />
+          <ScalarProperty Name="UsuarioAlteracao" ColumnName="UsuarioAlteracao" />
+          <ScalarProperty Name="Pessoa_Id" ColumnName="Pessoa_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

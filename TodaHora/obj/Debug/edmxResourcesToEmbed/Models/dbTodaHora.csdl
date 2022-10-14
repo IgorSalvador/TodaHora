@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbTodaHoraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Pessoa">
+    <Key>
+      <PropertyRef Name="Pessoa_Id" />
+    </Key>
+    <Property Name="Pessoa_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Sobrenome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DataNascimento" Type="DateTime" Precision="3" />
+    <Property Name="Cpf" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__Pessoa___2A4B4B5E" FromRole="Pessoa" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Usuario_Id" />
+    </Key>
+    <Property Name="Usuario_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Senha" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Data_Inclusao" Type="DateTime" Precision="3" />
+    <Property Name="blnAtivo" Type="Boolean" />
+    <Property Name="blnAdmin" Type="Boolean" />
+    <Property Name="Data_alteracao" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioAlteracao" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Pessoa_Id" Type="Int32" />
+    <NavigationProperty Name="Pessoa" Relationship="Self.FK__Usuario__Pessoa___2A4B4B5E" FromRole="Usuario" ToRole="Pessoa" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__Usuario__Pessoa___2A4B4B5E">
+    <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pessoa">
+        <PropertyRef Name="Pessoa_Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Pessoa_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbTodaHoraEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Pessoa" EntityType="Self.Pessoa" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK__Usuario__Pessoa___2A4B4B5E" Association="Self.FK__Usuario__Pessoa___2A4B4B5E">
+      <End Role="Pessoa" EntitySet="Pessoa" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

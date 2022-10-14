@@ -84,3 +84,7 @@ C:\Users\igors\Documents\Projetos\TodaHora\TodaHora\obj\Debug\TodaHora.csproj.Co
 C:\Users\igors\Documents\Projetos\TodaHora\TodaHora\obj\Debug\TodaHora.csproj.CopyComplete
 C:\Users\igors\Documents\Projetos\TodaHora\TodaHora\obj\Debug\TodaHora.dll
 C:\Users\igors\Documents\Projetos\TodaHora\TodaHora\obj\Debug\TodaHora.pdb
+C:\Users\igors\Documents\Projetos\TodaHora\TodaHora\bin\EntityFramework.dll
+C:\Users\igors\Documents\Projetos\TodaHora\TodaHora\bin\EntityFramework.SqlServer.dll
+C:\Users\igors\Documents\Projetos\TodaHora\TodaHora\bin\EntityFramework.xml
+C:\Users\igors\Documents\Projetos\TodaHora\TodaHora\bin\EntityFramework.SqlServer.xml

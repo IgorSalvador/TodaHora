@@ -27,7 +27,7 @@
                         <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
                     </svg>
                 </span>
-                <input type="text" name="username" class="inputLogin" placeholder="E-mail ou nome de usuário"/>
+                <input type="text" name="username" class="inputLogin" placeholder="E-mail ou nome de usuário" autocomplete="off" required/>
             </label>
             <label>
                 <span class="inputIcon">
@@ -35,13 +35,18 @@
                         <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
                     </svg>
                 </span>
-                <input type="password" name="password" class="inputLogin" placeholder="Senha" />
+                <input type="password" name="password" class="inputLogin" placeholder="Senha" autocomplete="off" required/>
             </label>
 
             <a href="@Url.Action("ResetPassword")">Esqueci minha senha</a>
 
             <button>Login :D</button>
         </form>
+
+        @if (ViewBag.InvalidUser != null && ViewBag.InvalidUser != "")
+        {
+            <p class="invalidAcess">@ViewBag.InvalidUser</p>
+        }
     </div>
 </body>
 </html>

@@ -17,5 +17,11 @@ namespace TodaHora
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        public void setCookieToResponse(HttpCookie cookie)
+        {
+            // Registrando cookie
+            HttpContext.Current.Response.SetCookie(cookie);
+        }
     }
 }

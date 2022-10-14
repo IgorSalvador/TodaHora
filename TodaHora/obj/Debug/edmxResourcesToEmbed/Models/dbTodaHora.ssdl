@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbTodaHoraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Pessoa">
+    <Key>
+      <PropertyRef Name="Pessoa_Id" />
+    </Key>
+    <Property Name="Pessoa_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="100" />
+    <Property Name="Sobrenome" Type="varchar" MaxLength="100" />
+    <Property Name="DataNascimento" Type="datetime" />
+    <Property Name="Cpf" Type="varchar" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Usuario_Id" />
+    </Key>
+    <Property Name="Usuario_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Senha" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Data_Inclusao" Type="datetime" />
+    <Property Name="blnAtivo" Type="bit" />
+    <Property Name="blnAdmin" Type="bit" />
+    <Property Name="Data_alteracao" Type="datetime" />
+    <Property Name="UsuarioAlteracao" Type="varchar" MaxLength="100" />
+    <Property Name="Pessoa_Id" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Usuario__Pessoa___2A4B4B5E">
+    <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pessoa">
+        <PropertyRef Name="Pessoa_Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Pessoa_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbTodaHoraModelStoreContainer">
+    <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Usuario__Pessoa___2A4B4B5E" Association="Self.FK__Usuario__Pessoa___2A4B4B5E">
+      <End Role="Pessoa" EntitySet="Pessoa" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
