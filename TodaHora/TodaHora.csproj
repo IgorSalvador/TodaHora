@@ -168,6 +168,7 @@
     <Content Include="Content\images\background_login.png" />
     <Content Include="Content\images\cart.png" />
     <Content Include="Content\images\client_logo.svg" />
+    <Content Include="Content\styles\LayoutStyle.css" />
     <Content Include="Content\styles\LoginSheet.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
