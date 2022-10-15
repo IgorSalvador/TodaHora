@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
@@ -8,6 +10,8 @@ using TodaHora.Models;
 using TodaHora.Models.Utils;
 using TodaHora.Models.ViewModel;
 using System.Configuration;
+using System.Web.UI;
+using System.Web.Helpers;
 
 namespace TodaHora.Controllers
 {
@@ -81,6 +85,13 @@ namespace TodaHora.Controllers
                 ViewBag.InvalidUser = ex.Message;
                 return View();
             }
+        }
+
+        public ActionResult LogOut()
+        {
+            Cookies cookies = new Cookies();
+            cookies.removerCookieLogin();
+            return RedirectToAction("Index", "Login");
         }
     }
 }
