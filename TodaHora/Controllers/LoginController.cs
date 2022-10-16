@@ -60,6 +60,7 @@ namespace TodaHora.Controllers
                     var cookie = new HttpCookie(ConfigurationManager.AppSettings["LoginCookieName"]);
 
                     //Preenchendo valores dos cookies
+                    cookie.Values.Add("user_Id", UsuarioSystem.Usuario_Id.ToString());
                     cookie.Values.Add("username", UsuarioSystem.Username);
                     cookie.Values.Add("email", UsuarioSystem.Email);
                     cookie.Values.Add("nome", $"{UsuarioSystem.Pessoa.Nome} {UsuarioSystem.Pessoa.Sobrenome}");
