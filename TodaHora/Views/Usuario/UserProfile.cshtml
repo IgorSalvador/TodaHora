@@ -1,4 +1,5 @@
 ﻿@using TodaHora.Models
+@using TodaHora.Models.Utils
 @model IEnumerable<TodaHora.Models.Usuario>
 @{
     ViewBag.Title = "Informações de usuário";
@@ -10,10 +11,10 @@
 
     <div class="container_user">
         <nav class="nav_user">
-            <h2>Informações</h2>
+            <h3>Informações</h3>
 
             <ul class="user_info_list">
-                <li><a href="#">Informações pessoais</a></li>
+                <li><a href="#">Pessoais</a></li>
                 <li><a href="#">Conta</a></li>
             </ul>
         </nav>
@@ -21,7 +22,59 @@
         <section class="details_user">
 
             <section class="profile">
-                
+
+                <div class="wrapper_user_name">
+                    <div>
+                        @Html.LabelFor(m => m.First().Pessoa.Nome, htmlAttributes: new { @class = "form_label_custom" })
+                        <div>
+                            @Html.TextBoxFor(m => m.First().Pessoa.Nome, new { @class = "form_input_custom", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+                    <div>
+                        @Html.LabelFor(m => m.First().Pessoa.Sobrenome, htmlAttributes: new { @class = "form_label_custom" })
+                        <div>
+                            @Html.TextBoxFor(m => m.First().Pessoa.Sobrenome, new { @class = "form_input_custom", @disabled = "disabled" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wrapper_user">
+
+                    <div class="container_info">
+                        @Html.LabelFor(m => m.First().Pessoa.Cpf, "CPF", htmlAttributes: new { @class = "form_label_custom" })
+                        <div>
+                            @Html.Raw($"<input type='text' name='Pessoa.Cpf' id='Pessoa.Cpf' value='{FormatCPFCNPJ.FormatCPF(Model.First().Pessoa.Cpf)}' class='form_input_custom' disabled>")
+                        </div>
+                    </div>
+
+                    <div class="container_info">
+                        @Html.LabelFor(m => m.First().Pessoa.DataNascimento, "Data Nascimento", htmlAttributes: new { @class = "form_label_custom" })
+                        <div>
+                            @Html.Raw($"<input type='datetime' name='Pessoa.DataNascimento' id='Pessoa.DataNascimento' value='{Convert.ToDateTime(Model.First().Pessoa.DataNascimento.Value).ToString("dd/MM/yyyy")}' class='form_input_custom' disabled>")
+                        </div>
+                    </div>
+
+                    <div class="container_info">
+                        @Html.LabelFor(m => m.First().Pessoa.Sexo.Descricao, "Gênero", htmlAttributes: new { @class = "form_label_custom" })
+                        <div>
+                            @Html.TextBoxFor(m => m.First().Pessoa.Sexo.Descricao, new { @class = "form_input_custom", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+                    <div class="container_info">
+                        @Html.LabelFor(m => m.First().Pessoa.Telefone, "Contato", htmlAttributes: new { @class = "form_label_custom" })
+                        <div>
+                            @Html.Raw($"<input type='text' name='Pessoa.Telefone' id='Pessoa.Telefone' value='{FormatTelefone.FormatTel(Model.First().Pessoa.Telefone)}' class='form_input_custom' disabled>")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn_confirmation">
+                    <button id="btnEdit" class="btn btn-primary">Editar</button>
+                    <button id="blnSave" class="btn btn-success">Salvar</button>
+                </div>
+
             </section>
 
             <section class="account">

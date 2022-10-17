@@ -12,24 +12,19 @@ namespace TodaHora.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Pessoa
+    public partial class Sexo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Pessoa()
+        public Sexo()
         {
-            this.Usuario = new HashSet<Usuario>();
+            this.Pessoa = new HashSet<Pessoa>();
         }
     
-        public int Pessoa_Id { get; set; }
-        public string Nome { get; set; }
-        public string Sobrenome { get; set; }
-        public Nullable<System.DateTime> DataNascimento { get; set; }
-        public string Cpf { get; set; }
-        public Nullable<int> Sexo_Id { get; set; }
-        public string Telefone { get; set; }
+        public int Sexo_Id { get; set; }
+        public string Descricao { get; set; }
+        public Nullable<bool> blnAtivo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuario { get; set; }
-        public virtual Sexo Sexo { get; set; }
+        public virtual ICollection<Pessoa> Pessoa { get; set; }
     }
 }

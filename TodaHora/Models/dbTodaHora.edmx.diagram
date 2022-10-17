@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="dbTodaHoraModel.Pessoa" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="dbTodaHoraModel.Usuario" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="dbTodaHoraModel.FK__Usuario__Pessoa___2A4B4B5E" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbTodaHoraModel.Sexo" Width="1.5" PointX="0.75" PointY="5.75" />
+        <AssociationConnector Association="dbTodaHoraModel.FK__Pessoa__Sexo_Id__36B12243" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

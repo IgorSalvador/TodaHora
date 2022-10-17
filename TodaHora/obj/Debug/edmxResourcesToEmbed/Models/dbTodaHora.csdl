@@ -10,6 +10,9 @@
     <Property Name="DataNascimento" Type="DateTime" Precision="3" />
     <Property Name="Cpf" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__Pessoa___2A4B4B5E" FromRole="Pessoa" ToRole="Usuario" />
+    <Property Name="Sexo_Id" Type="Int32" />
+    <NavigationProperty Name="Sexo" Relationship="dbTodaHoraModel.FK__Pessoa__Sexo_Id__36B12243" FromRole="Pessoa" ToRole="Sexo" />
+    <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -46,5 +49,31 @@
       <End Role="Pessoa" EntitySet="Pessoa" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
+    <EntitySet Name="Sexo" EntityType="dbTodaHoraModel.Sexo" />
+    <AssociationSet Name="FK__Pessoa__Sexo_Id__36B12243" Association="dbTodaHoraModel.FK__Pessoa__Sexo_Id__36B12243">
+      <End Role="Sexo" EntitySet="Sexo" />
+      <End Role="Pessoa" EntitySet="Pessoa" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Sexo">
+    <Key>
+      <PropertyRef Name="Sexo_Id" />
+    </Key>
+    <Property Name="Sexo_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="blnAtivo" Type="Boolean" />
+    <NavigationProperty Name="Pessoa" Relationship="dbTodaHoraModel.FK__Pessoa__Sexo_Id__36B12243" FromRole="Sexo" ToRole="Pessoa" />
+  </EntityType>
+  <Association Name="FK__Pessoa__Sexo_Id__36B12243">
+    <End Type="dbTodaHoraModel.Sexo" Role="Sexo" Multiplicity="0..1" />
+    <End Type="dbTodaHoraModel.Pessoa" Role="Pessoa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sexo">
+        <PropertyRef Name="Sexo_Id" />
+      </Principal>
+      <Dependent Role="Pessoa">
+        <PropertyRef Name="Sexo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -153,11 +153,15 @@
     <Compile Include="Models\Pessoa.cs">
       <DependentUpon>dbTodaHora.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Sexo.cs">
+      <DependentUpon>dbTodaHora.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>dbTodaHora.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Utils\Cryptography.cs" />
     <Compile Include="Models\Utils\FormatCPFCNPJ.cs" />
+    <Compile Include="Models\Utils\FormatTelefone.cs" />
     <Compile Include="Models\ViewModel\UserLoginView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

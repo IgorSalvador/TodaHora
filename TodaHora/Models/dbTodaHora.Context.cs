@@ -27,5 +27,6 @@ namespace TodaHora.Models
     
         public virtual DbSet<Pessoa> Pessoa { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Sexo> Sexo { get; set; }
     }
 }
