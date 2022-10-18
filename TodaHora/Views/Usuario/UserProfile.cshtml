@@ -14,14 +14,15 @@
             <h3>Informações</h3>
 
             <ul class="user_info_list">
-                <li><a href="#">Pessoais</a></li>
-                <li><a href="#">Conta</a></li>
+                <li><a href="#profile" id="profileLink">Pessoais</a></li>
+                <li><a href="#account" id="accountLink">Conta</a></li>
+                <li><a href="#account_password" id="accountPasswordLink">Senha</a></li>
             </ul>
         </nav>
 
         <section class="details_user">
 
-            <section class="profile">
+            <section class="profile" id="profile">
 
                 <div class="wrapper_user_name">
                     <div>
@@ -58,7 +59,9 @@
                     <div class="container_info">
                         @Html.LabelFor(m => m.First().Pessoa.Sexo.Descricao, "Gênero", htmlAttributes: new { @class = "form_label_custom" })
                         <div>
-                            @Html.TextBoxFor(m => m.First().Pessoa.Sexo.Descricao, new { @class = "form_input_custom", @disabled = "disabled" })
+                            <select class="form_input_custom" disabled name="Pessoa.Sexo" id="Pessoa.Sexo">
+                                @Html.Raw($"<option value='{Model.First().Pessoa.Sexo.Sexo_Id}'>{Model.First().Pessoa.Sexo.Descricao}</option>")
+                            </select>
                         </div>
                     </div>
 
@@ -70,17 +73,113 @@
                     </div>
                 </div>
 
-                <div class="btn_confirmation">
+                <div class="btn_confirmation_pessoal">
                     <button id="btnEdit" class="btn btn-primary">Editar</button>
                     <button id="blnSave" class="btn btn-success">Salvar</button>
                 </div>
 
             </section>
 
-            <section class="account">
+            <section class="account" id="account">
 
+                <div class="wrapper_username">
+
+                    <div>
+                        @Html.LabelFor(m => m.First().Username, "Nome de usuário", htmlAttributes: new { @class = "form_label_custom" })
+                        <div>
+                            @Html.TextBoxFor(m => m.First().Username, new { @class = "form_input_custom", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="wrapper_user_mail">
+                    <div>
+                        @Html.LabelFor(m => m.First().Email, "E-mail", htmlAttributes: new { @class = "form_label_custom" })
+                        <div>
+                            @Html.TextBoxFor(m => m.First().Email, new { @class = "form_input_custom", @disabled = "disabled" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn_confirmation_account">
+                    <button id="btnEdit" class="btn btn-primary">Editar</button>
+                    <button id="blnSave" class="btn btn-success">Salvar</button>
+                </div>
+
+            </section>
+
+            <section class="account_password" id="account_password">
+
+                <div class="wrapper_user_password">
+                    <div>
+                        @Html.LabelFor(m => m.First().Senha, "Senha", htmlAttributes: new { @class = "form_label_custom" })
+                        <div>
+                            @Html.Raw($"<input type='password' name='Usuario.Senha' id='Usuario.Senha' value='{Model.First().Senha}' class='form_input_custom' disabled/>")
+                        </div>
+                    </div>
+
+                    <div>
+                        @Html.Raw($"<label class='form_label_custom' for='Usuario.SenhaConfirmacao'>Senha Confirmação</label>")
+                        <div>
+                            @Html.Raw($"<input type='password' name='Usuario.SenhaConfirmacao' id='Usuario.SenhaConfirmacao' value='' class='form_input_custom' disabled/>")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn_confirmation_password">
+                    <button id="btnEdit" class="btn btn-primary">Editar</button>
+                    <button id="blnSave" class="btn btn-success">Salvar</button>
+                </div>
             </section>
 
         </section>
     </div>
 </div>
+
+@section Scripts{
+    
+    <script>
+        window.onload = onLoadLayout();
+
+        $(document).ready(function () {
+
+            $("#profileLink").on("click", function () {
+                let divProfile = document.getElementById("profile");
+                let divAccount = document.getElementById("account");
+                let divAccountPass = document.getElementById("account_password");
+
+                divProfile.style.display = "flex";
+                divAccount.style.display = "none";
+                divAccountPass.style.display = "none";
+            });
+
+            $("#accountLink").on("click", function () {
+                let divProfile = document.getElementById("profile");
+                let divAccount = document.getElementById("account");
+                let divAccountPass = document.getElementById("account_password");
+
+                divProfile.style.display = "none";
+                divAccount.style.display = "flex";
+                divAccountPass.style.display = "none";
+            });
+
+            $("#accountPasswordLink").on("click", function () {
+                let divProfile = document.getElementById("profile");
+                let divAccount = document.getElementById("account");
+                let divAccountPass = document.getElementById("account_password");
+
+                divProfile.style.display = "none";
+                divAccount.style.display = "none";
+                divAccountPass.style.display = "flex";
+            });
+        });
+
+        function onLoadLayout() {
+            let divAccount = document.getElementById("account");
+            let divAccountPass = document.getElementById("account_password");
+            divAccount.style.display = "none";
+            divAccountPass.style.display = "none";
+        }
+    </script>
+}

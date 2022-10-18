@@ -62,34 +62,26 @@
     margin-top: 20px;
 }
 
-.profile {
+.profile, .account, .account_password {
     width: 100%;
     display: flex;
     flex-direction: column;
-    
 }
 
-.wrapper_user_name {
+.wrapper_user_name, .wrapper_user, .wrapper_username, .wrapper_user_mail, .wrapper_user_password {
     width: 100%;
     display: flex;
     justify-content: space-between;
     gap: 50px;
+}
+
+.wrapper_user div, .wrapper_username div, .wrapper_user_mail div, .wrapper_user_password div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .wrapper_user_name div{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.wrapper_user {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 50px;
-}
-
-.wrapper_user div {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -111,7 +103,7 @@
     border: 2px solid gray;
 }
 
-.btn_confirmation{
+.btn_confirmation_pessoal, .btn_confirmation_account, .btn_confirmation_password {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -125,16 +117,14 @@
         gap: 1px;
     }
 
-    .wrapper_user {
+    .wrapper_user, .wrapper_user_password {
         flex-direction: row;
         flex-wrap: wrap;
         gap: 10px;
     }
 
-    .wrapper_user .container_info{
+    .wrapper_user .container_info, .wrapper_user_password .container_info{
         width: 48%;
-    }
-
-    
+    }   
 
 }
