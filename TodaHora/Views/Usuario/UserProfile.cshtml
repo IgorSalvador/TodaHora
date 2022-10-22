@@ -22,20 +22,22 @@
 
         <section class="details_user">
 
+            @Html.HiddenFor(m => m.First().Usuario_Id, htmlAttributes: new { @class = "usuario_id" })
+
             <section class="profile" id="profile">
 
                 <div class="wrapper_user_name">
                     <div>
                         @Html.LabelFor(m => m.First().Pessoa.Nome, htmlAttributes: new { @class = "form_label_custom" })
                         <div>
-                            @Html.TextBoxFor(m => m.First().Pessoa.Nome, new { @class = "form_input_custom", @disabled = "disabled" })
+                            @Html.TextBoxFor(m => m.First().Pessoa.Nome, new { @class = "form_input_custom nome", @disabled = "disabled" })
                         </div>
                     </div>
 
                     <div>
                         @Html.LabelFor(m => m.First().Pessoa.Sobrenome, htmlAttributes: new { @class = "form_label_custom" })
                         <div>
-                            @Html.TextBoxFor(m => m.First().Pessoa.Sobrenome, new { @class = "form_input_custom", @disabled = "disabled" })
+                            @Html.TextBoxFor(m => m.First().Pessoa.Sobrenome, new { @class = "form_input_custom sobrenome", @disabled = "disabled" })
                         </div>
                     </div>
                 </div>
@@ -45,22 +47,34 @@
                     <div class="container_info">
                         @Html.LabelFor(m => m.First().Pessoa.Cpf, "CPF", htmlAttributes: new { @class = "form_label_custom" })
                         <div>
-                            @Html.Raw($"<input type='text' name='Pessoa.Cpf' id='Pessoa.Cpf' value='{FormatCPFCNPJ.FormatCPF(Model.First().Pessoa.Cpf)}' class='form_input_custom' disabled>")
+                            @Html.Raw($"<input type='text' name='Pessoa.Cpf' id='Pessoa.Cpf' value='{Model.First().Pessoa.Cpf}' class='form_input_custom cpf' disabled>")
                         </div>
                     </div>
 
                     <div class="container_info">
                         @Html.LabelFor(m => m.First().Pessoa.DataNascimento, "Data Nascimento", htmlAttributes: new { @class = "form_label_custom" })
                         <div>
-                            @Html.Raw($"<input type='datetime' name='Pessoa.DataNascimento' id='Pessoa.DataNascimento' value='{Convert.ToDateTime(Model.First().Pessoa.DataNascimento.Value).ToString("dd/MM/yyyy")}' class='form_input_custom' disabled>")
+                            @Html.Raw($"<input type='datetime' name='Pessoa.DataNascimento' id='Pessoa.DataNascimento' value='{Convert.ToDateTime(Model.First().Pessoa.DataNascimento.Value).ToString("dd/MM/yyyy")}' class='form_input_custom dataNascimento' disabled>")
                         </div>
                     </div>
 
                     <div class="container_info">
                         @Html.LabelFor(m => m.First().Pessoa.Sexo.Descricao, "Gênero", htmlAttributes: new { @class = "form_label_custom" })
                         <div>
-                            <select class="form_input_custom" disabled name="Pessoa.Sexo" id="Pessoa.Sexo">
-                                @Html.Raw($"<option value='{Model.First().Pessoa.Sexo.Sexo_Id}'>{Model.First().Pessoa.Sexo.Descricao}</option>")
+                            <select class="form_input_custom sexo" disabled name="Pessoa.Sexo" id="Pessoa.Sexo">
+                                @foreach (var genero in ViewBag.GeneroList)
+                                {
+
+                                    if (genero.Sexo_Id == Model.First().Pessoa.Sexo.Sexo_Id)
+                                    {
+                                        @Html.Raw($"<option value='{genero.Sexo_Id}' selected>{genero.Descricao}</option>")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw($"<option value='{genero.Sexo_Id}'>{genero.Descricao}</option>")
+                                    }
+                                }
+
                             </select>
                         </div>
                     </div>
@@ -68,14 +82,14 @@
                     <div class="container_info">
                         @Html.LabelFor(m => m.First().Pessoa.Telefone, "Contato", htmlAttributes: new { @class = "form_label_custom" })
                         <div>
-                            @Html.Raw($"<input type='text' name='Pessoa.Telefone' id='Pessoa.Telefone' value='{FormatTelefone.FormatTel(Model.First().Pessoa.Telefone)}' class='form_input_custom' disabled>")
+                            @Html.Raw($"<input type='text' name='Pessoa.Telefone' id='Pessoa.Telefone' value='{FormatTelefone.FormatTel(Model.First().Pessoa.Telefone)}' class='form_input_custom contato' disabled>")
                         </div>
                     </div>
                 </div>
 
                 <div class="btn_confirmation_pessoal">
-                    <button id="btnEdit" class="btn btn-primary">Editar</button>
-                    <button id="blnSave" class="btn btn-success">Salvar</button>
+                    <button id="btnEditProfile" class="btn btn-primary">Editar</button>
+                    <button id="blnSaveProfile" class="btn btn-success">Salvar</button>
                 </div>
 
             </section>
@@ -87,7 +101,7 @@
                     <div>
                         @Html.LabelFor(m => m.First().Username, "Nome de usuário", htmlAttributes: new { @class = "form_label_custom" })
                         <div>
-                            @Html.TextBoxFor(m => m.First().Username, new { @class = "form_input_custom", @disabled = "disabled" })
+                            @Html.TextBoxFor(m => m.First().Username, new { @class = "form_input_custom username", @disabled = "disabled" })
                         </div>
                     </div>
 
@@ -97,14 +111,14 @@
                     <div>
                         @Html.LabelFor(m => m.First().Email, "E-mail", htmlAttributes: new { @class = "form_label_custom" })
                         <div>
-                            @Html.TextBoxFor(m => m.First().Email, new { @class = "form_input_custom", @disabled = "disabled" })
+                            @Html.TextBoxFor(m => m.First().Email, new { @class = "form_input_custom email", @disabled = "disabled" })
                         </div>
                     </div>
                 </div>
 
                 <div class="btn_confirmation_account">
-                    <button id="btnEdit" class="btn btn-primary">Editar</button>
-                    <button id="blnSave" class="btn btn-success">Salvar</button>
+                    <button id="btnEditAccount" class="btn btn-primary">Editar</button>
+                    <button id="blnSaveAccount" class="btn btn-success">Salvar</button>
                 </div>
 
             </section>
@@ -115,21 +129,21 @@
                     <div>
                         @Html.LabelFor(m => m.First().Senha, "Senha", htmlAttributes: new { @class = "form_label_custom" })
                         <div>
-                            @Html.Raw($"<input type='password' name='Usuario.Senha' id='Usuario.Senha' value='{Model.First().Senha}' class='form_input_custom' disabled/>")
+                            @Html.Raw($"<input type='password' name='Usuario.Senha' id='Usuario.Senha' value='{Model.First().Senha}' class='form_input_custom password' disabled/>")
                         </div>
                     </div>
 
                     <div>
                         @Html.Raw($"<label class='form_label_custom' for='Usuario.SenhaConfirmacao'>Senha Confirmação</label>")
                         <div>
-                            @Html.Raw($"<input type='password' name='Usuario.SenhaConfirmacao' id='Usuario.SenhaConfirmacao' value='' class='form_input_custom' disabled/>")
+                            @Html.Raw($"<input type='password' name='Usuario.SenhaConfirmacao' id='Usuario.SenhaConfirmacao' value='' class='form_input_custom passwordConfirmation' disabled/>")
                         </div>
                     </div>
                 </div>
 
                 <div class="btn_confirmation_password">
-                    <button id="btnEdit" class="btn btn-primary">Editar</button>
-                    <button id="blnSave" class="btn btn-success">Salvar</button>
+                    <button id="btnEditPassword" class="btn btn-primary">Editar</button>
+                    <button id="blnSavePassword" class="btn btn-success">Salvar</button>
                 </div>
             </section>
 
@@ -138,11 +152,18 @@
 </div>
 
 @section Scripts{
-    
+    <script src="~/Scripts/jquery.mask.js"></script>
+    <script src="~/Scripts/jquery.mask.min.js"></script>
     <script>
         window.onload = onLoadLayout();
 
         $(document).ready(function () {
+
+            //Masks Sections
+            $(".cpf").mask("000.000.000-00");
+            $(".contato").mask("(00) 00000-0000");
+            $(".dataNascimento").mask("00/00/0000");
+
 
             $("#profileLink").on("click", function () {
                 let divProfile = document.getElementById("profile");
@@ -172,6 +193,40 @@
                 divProfile.style.display = "none";
                 divAccount.style.display = "none";
                 divAccountPass.style.display = "flex";
+            });
+
+
+            // Libera campos para edição
+            $("#btnEditProfile").on("click", function () {
+                let nome = document.querySelector(".nome");
+                let sobrenome = document.querySelector(".sobrenome");
+                let dataNascimento = document.querySelector(".dataNascimento");
+                let cpf = document.querySelector(".cpf");
+                let telefone = document.querySelector(".contato");
+                let sexo = document.querySelector(".sexo");
+
+                nome.disabled = false;
+                sobrenome.disabled = false;
+                dataNascimento.disabled = false;
+                cpf.disabled = false;
+                telefone.disabled = false;
+                sexo.disabled = false;
+            });
+
+            $("#btnEditAccount").on("click", function () {
+                let username = document.querySelector(".username");
+                let email = document.querySelector(".email");
+
+                username.disabled = false;
+                email.disabled = false;
+            });
+
+            $("#btnEditAccount").on("click", function () {
+                let password = document.querySelector(".password");
+                let passwordConfirmation = document.querySelector(".passwordConfirmation");
+
+                password.disabled = false;
+                passwordConfirmation.disabled = false;
             });
         });
 

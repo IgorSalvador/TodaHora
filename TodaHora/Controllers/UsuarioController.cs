@@ -19,6 +19,9 @@ namespace TodaHora.Controllers
 
         public ActionResult UserProfile(int user_Id)
         {
+            //Lista generos disponiveis para exibição na tela em caso de edição.
+            ViewBag.GeneroList = dbTodaHora.Sexo.Where(m => m.blnAtivo == true).ToList();
+
             return View(dbTodaHora.Usuario.Where(m => m.Usuario_Id == user_Id).ToList());
         }
     }
