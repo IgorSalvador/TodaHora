@@ -8,7 +8,7 @@ namespace TodaHora.Models
 {
     public class Cookies : HttpApplication
     {
-
+        private dbTodaHoraEntities db = new dbTodaHoraEntities();
         private string cookieName { get; set; }
         public int user_Id { get; set; }
         public string username { get; set; }
@@ -82,6 +82,44 @@ namespace TodaHora.Models
         {
             //Removendo cookie
             HttpContext.Current.Response.Cookies[this.cookieName].Expires = DateTime.Now.AddDays(-1);
+        }
+
+        public bool reloadCookies(int usuario_id)
+        {
+            try
+            {
+                //Remove os cookies atuais
+                removerCookieLogin();
+
+                var UsuarioSystem = db.Usuario.Find(usuario_id);
+
+                // Criando instancia dos cookies
+                var cookie = new HttpCookie(ConfigurationManager.AppSettings["LoginCookieName"]);
+
+                //Preenchendo valores dos cookies
+                cookie.Values.Add("user_Id", UsuarioSystem.Usuario_Id.ToString());
+                cookie.Values.Add("username", UsuarioSystem.Username);
+                cookie.Values.Add("email", UsuarioSystem.Email);
+                cookie.Values.Add("nome", $"{UsuarioSystem.Pessoa.Nome} {UsuarioSystem.Pessoa.Sobrenome}");
+                if (UsuarioSystem.blnAdmin == true)
+                    cookie.Values.Add("IsAdmin", "S");
+                else
+                    cookie.Values.Add("isAdmin", "N");
+                cookie.Values.Add("isLoggedIn", "S");
+                cookie.Expires = DateTime.Now.AddHours(1);
+
+                //Definindo segurança do cookie
+                cookie.HttpOnly = true;
+
+                MvcApplication objGlobal = new MvcApplication();
+                objGlobal.setCookieToResponse(cookie);
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
     }
 

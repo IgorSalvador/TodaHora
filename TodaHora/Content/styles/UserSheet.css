@@ -1,7 +1,24 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+.wrapper_modal {
+    position: absolute;
+    top: 10vh;
+    right: 20vw;
+    left: 20vw;
+
+    height: 150px;
+    width: 100%;
+    max-width: 500px;
+    min-width: 350px;
+    background-color: whitesmoke;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+}
+
 .container_wrapper_user {
     display: flex;
+    z-index: -1;
     flex-direction: column;
     gap: 50px;
     margin-top: 20px;

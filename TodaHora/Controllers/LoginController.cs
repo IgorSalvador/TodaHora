@@ -20,7 +20,17 @@ namespace TodaHora.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            return View();
+            Cookies cookie = new Cookies();
+
+            //Valida existência do cookie preenchido, caso vázio solicita login, se não redireciona para o Index/Home
+            if(cookie.username == String.Empty)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }     
         }
 
         [HttpPost]

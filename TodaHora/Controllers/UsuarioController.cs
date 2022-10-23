@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using TodaHora.Models;
+using TodaHora.Models.Utils;
+using TodaHora.Models.ViewModel;
 
 namespace TodaHora.Controllers
 {
@@ -23,6 +26,49 @@ namespace TodaHora.Controllers
             ViewBag.GeneroList = dbTodaHora.Sexo.Where(m => m.blnAtivo == true).ToList();
 
             return View(dbTodaHora.Usuario.Where(m => m.Usuario_Id == user_Id).ToList());
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
+        public JsonResult EditProfile(int usuario_Id, string nome, string sobrenome, DateTime dataNascimento, string cpf, string telefone, int sexo)
+        {
+            UserViewModel Usuario = new UserViewModel();
+            try
+            {
+                Usuario.Usuario_Id = usuario_Id;
+                Usuario.Nome = nome;
+                Usuario.Sobrenome = sobrenome;
+                Usuario.DataNascimento = dataNascimento;
+                Usuario.Cpf = FormatCPFCNPJ.SemFormatacao(cpf);
+                Usuario.Telefone = FormatTelefone.SemFormatacao(telefone);
+                Usuario.Sexo_Id = sexo;
+
+                var ListagemUsuario = Usuario.EditProfile(Usuario);
+
+                if(ListagemUsuario.Count > 0)
+                {
+                    Cookies cookíe = new Cookies();
+
+                    if (cookíe.reloadCookies(usuario_Id))
+                    {
+                        return Json(true, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(false, JsonRequestBehavior.AllowGet);
+                    }     
+                }
+                else
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                return Json(ex, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

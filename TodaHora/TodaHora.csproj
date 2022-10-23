@@ -163,6 +163,7 @@
     <Compile Include="Models\Utils\FormatCPFCNPJ.cs" />
     <Compile Include="Models\Utils\FormatTelefone.cs" />
     <Compile Include="Models\ViewModel\UserLoginView.cs" />
+    <Compile Include="Models\ViewModel\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
