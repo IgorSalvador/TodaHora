@@ -18,7 +18,6 @@
 
 .container_wrapper_user {
     display: flex;
-    z-index: -1;
     flex-direction: column;
     gap: 50px;
     margin-top: 20px;

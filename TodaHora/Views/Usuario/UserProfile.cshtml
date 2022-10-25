@@ -151,7 +151,24 @@
     </div>
 
 
-
+    <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ALERTA <i class="mdi mdi-alert"></i></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-text"></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="modalButton" type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -225,7 +242,7 @@
                 email.disabled = false;
             });
 
-            $("#btnEditAccount").on("click", function () {
+            $("#btnEditPassword").on("click", function () {
                 let password = document.querySelector(".password");
                 let passwordConfirmation = document.querySelector(".passwordConfirmation");
 
@@ -262,14 +279,112 @@
                     };
 
                     $.ajax(settings).done(function (response) {
-                        alert("Atualização de informações realizada com sucesso!");
-                        window.location.reload();
+                        console.log(response);
+                        if (response == true) {
+                            let modalText = document.querySelector(".modal-text");
+                            modalText.innerHTML = "Atualização de dados realizada com sucesso!";
+                            $(".modal").modal("show");
+                        }
+                        else {
+                            let modalText = document.querySelector(".modal-text");
+                            modalText.innerHTML = response;
+                        }
                     });
                 }
                 else {
-                    alert("Preencha todos os campos para realizar a edição!");
-                    window.location.reload();
+                    let modalText = document.querySelector(".modal-text");
+                    modalText.innerHTML = "Preencha todos os campos para realizar a edição!";
+                    $(".modal").modal("show");
                 }
+            });
+
+            $("#blnSaveAccount").on("click", function () {
+                document.querySelector(".username").disable = true;
+                document.querySelector(".email").disable = true;
+
+                if (document.querySelector(".username").value != "" && document.querySelector(".email").value != "") {
+                    let settings = {
+                        "url": "@Url.Action("EditAccout", "Usuario")",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "data": JSON.stringify({
+                            "usuario_Id": document.querySelector(".usuario_id").value,
+                            "username": document.querySelector(".username").value,
+                            "email": document.querySelector(".email").value
+                        }),
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        console.log(response);
+                        if (response == true) {
+                            let modalText = document.querySelector(".modal-text");
+                            modalText.innerHTML = "Atualização de dados realizada com sucesso!";
+                            $(".modal").modal("show");
+                        }
+                        else {
+                            let modalText = document.querySelector(".modal-text");
+                            modalText.innerHTML = response;
+                        }
+                    });
+                }
+                else {
+                    let modalText = document.querySelector(".modal-text");
+                    modalText.innerHTML = "Preencha todos os campos para realizar a edição!";
+                    $(".modal").modal("show");
+                }
+            });
+
+            $("#blnSavePassword").on("click", function () {
+                document.querySelector(".password").disabled = true;
+                document.querySelector(".passwordConfirmation").disabled = true;
+
+                if (document.querySelector(".password").value == document.querySelector(".passwordConfirmation").value) {
+                    if (document.querySelector(".password").value != "" && document.querySelector(".passwordConfirmation").value) {
+                        let settings = {
+                            "url": "@Url.Action("EditAccoutPassword", "Usuario")",
+                            "method": "POST",
+                            "timeout": 0,
+                            "headers": {
+                                "Content-Type": "application/json"
+                            },
+                            "data": JSON.stringify({
+                                "usuario_Id": document.querySelector(".usuario_id").value,
+                                "password": document.querySelector(".password").value
+                            }),
+                        };
+
+                        $.ajax(settings).done(function (response) {
+                            console.log(response);
+                            if (response == true) {
+                                let modalText = document.querySelector(".modal-text");
+                                modalText.innerHTML = "Atualização de dados realizada com sucesso!";
+                                $(".modal").modal("show");
+                            }
+                            else {
+                                let modalText = document.querySelector(".modal-text");
+                                modalText.innerHTML = response;
+                            }
+                        });
+                    }
+                    else {
+                        let modalText = document.querySelector(".modal-text");
+                        modalText.innerHTML = "Preencha todos os campos para realizar a edição!";
+                        $(".modal").modal("show");
+                    }
+                }
+                else {
+                    let modalText = document.querySelector(".modal-text");
+                    modalText.innerHTML = "As senhas devem ser iguais para realizar a alteração!";
+                    $(".modal").modal("show");
+                }
+                
+            });
+
+            $("#modalButton").on("click", function () {
+                window.location.reload();
             });
         });
 

@@ -11,7 +11,8 @@ namespace TodaHora.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Usuario
     {
         public int Usuario_Id { get; set; }
@@ -23,6 +24,8 @@ namespace TodaHora.Models
         public Nullable<System.DateTime> Data_alteracao { get; set; }
         public string UsuarioAlteracao { get; set; }
         public Nullable<int> Pessoa_Id { get; set; }
+
+        [DataType( DataType.EmailAddress)]
         public string Email { get; set; }
     
         public virtual Pessoa Pessoa { get; set; }

@@ -56,14 +56,91 @@ namespace TodaHora.Controllers
                     }
                     else
                     {
-                        return Json(false, JsonRequestBehavior.AllowGet);
+                        throw new Exception("Erro ao atualizar cookies, após atualização do perfil");
                     }     
                 }
                 else
                 {
-                    return Json(false, JsonRequestBehavior.AllowGet);
+                    throw new Exception("Erro ao realizar a atualização do perfil");
                 }
                 
+            }
+            catch(Exception ex)
+            {
+                return Json(ex, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
+        public JsonResult EditAccount(int usuario_Id, string username, string email)
+        {
+            UserViewModel Usuario = new UserViewModel();
+
+            try
+            {
+                Usuario.Usuario_Id = usuario_Id;
+                Usuario.Username = username;
+                Usuario.Email = email;
+
+                var ListagemUsuario = Usuario.EditAccount(Usuario);
+
+                if (ListagemUsuario.Count > 0)
+                {
+                    Cookies cookíe = new Cookies();
+
+                    if (cookíe.reloadCookies(usuario_Id))
+                    {
+                        return Json(true, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        throw new Exception("Erro ao atualizar cookies, após atualização do perfil");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Erro ao realizar a atualização do perfil");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(ex, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
+        public JsonResult EditAccoutPassword(int usuario_Id, string password)
+        {
+            UserViewModel Usuario = new UserViewModel();
+
+            try
+            {
+                Usuario.Usuario_Id = usuario_Id;
+                Usuario.Password = Cryptography.Base64Encode(password);
+
+                var ListagemUsuario = Usuario.EditAccountPassword(Usuario);
+
+                if (ListagemUsuario.Count > 0)
+                {
+                    Cookies cookíe = new Cookies();
+
+                    if (cookíe.reloadCookies(usuario_Id))
+                    {
+                        return Json(true, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        throw new Exception("Erro ao atualizar cookies, após atualização do perfil");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Erro ao realizar a atualização do perfil");
+                }
             }
             catch(Exception ex)
             {

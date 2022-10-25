@@ -12,12 +12,12 @@ namespace TodaHora.Models.ViewModel
         public int Usuario_Id { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
-        public string Email { get; set;  }
-        public string Username { get; set;  }
-        public string Password { get; set;  }
-        public string Telefone { get; set;  }
-        public string Cpf { get; set;  }
-        public DateTime DataNascimento { get; set;  }
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Telefone { get; set; }
+        public string Cpf { get; set; }
+        public DateTime DataNascimento { get; set; }
         public int Sexo_Id { get; set; }
         public int Pessoa_Id { get; set; }
         public bool blnAtivo { get; set; }
@@ -52,10 +52,61 @@ namespace TodaHora.Models.ViewModel
                 ListUser.Add(usuario);
                 return ListUser.ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Erro " + ex);
-;           }
+            }
+        }
+
+        public List<Usuario> EditAccount(UserViewModel UserUpdate)
+        {
+            try
+            {
+                //Recupera os cookies para salvar informações no banco referente a alteração
+                LoginCookiesAtual.getCookies();
+
+                var usuario = db.Usuario.Find(UserUpdate.Usuario_Id);
+
+                usuario.Username = UserUpdate.Username;
+                usuario.Email = UserUpdate.Email;
+                usuario.Data_alteracao = DateTime.Now;
+                usuario.UsuarioAlteracao = LoginCookiesAtual.nome;
+
+                db.Entry(usuario).State = EntityState.Modified;
+                db.SaveChanges();
+
+                ListUser.Add(usuario);
+                return ListUser.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro " + ex);
+            }
+        }
+
+        public List<Usuario> EditAccountPassword(UserViewModel UserUpdate)
+        {
+            try
+            {
+                //Recupera os cookies para salvar informações no banco referente a alteração
+                LoginCookiesAtual.getCookies();
+
+                var usuario = db.Usuario.Find(UserUpdate.Usuario_Id);
+
+                usuario.Senha = UserUpdate.Password;
+                usuario.Data_alteracao = DateTime.Now;
+                usuario.UsuarioAlteracao = LoginCookiesAtual.nome;
+
+                db.Entry(usuario).State = EntityState.Modified;
+                db.SaveChanges();
+
+                ListUser.Add(usuario);
+                return ListUser.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro " + ex);
+            }
         }
     }
 }
