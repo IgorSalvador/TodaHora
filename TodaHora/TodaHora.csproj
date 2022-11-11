@@ -184,8 +184,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\dbTodaHora.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>dbTodaHora.Context.cs</LastGenOutput>
       <DependentUpon>dbTodaHora.edmx</DependentUpon>
+      <LastGenOutput>dbTodaHora.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\dbTodaHora.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

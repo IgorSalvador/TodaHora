@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TodaHora.Models;
 
 namespace TodaHora.Controllers
 {
     public class HomeController : Controller
     {
+        private dbTodaHoraEntities db = new dbTodaHoraEntities();
+
         public ActionResult Index()
         {
+            ViewBag.TotalUsuarios = db.Usuario.Where(m => m.blnAtivo == true).Count();
+
             return View();
         }
 

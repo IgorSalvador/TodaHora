@@ -1,7 +1,15 @@
-﻿.system_options_wrapper {
+﻿body{
+    font-family: Arial, sans-serif;
+}
+
+:root{
+    --font_card_size: 16px;
+    --font_card_count: 40px;
+}
+
+.system_options_wrapper {
     width: 100%;
     min-width: 500px;
-    
     margin-top: 100px;
     display: flex;
     flex-wrap: wrap;
@@ -13,42 +21,58 @@
     width: 100%;
     max-width: 450px;
     min-width: 300px;
-    height: 250px;
-    border: 8px solid gray;
-    border-radius: 10px;
-}
-
-.user_card {
+    height: 200px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    font-family: 'Inter', sans-serif;
-    font-size: 25px;
-    fill: white;
-    color: white;
-    text-transform: uppercase;
-    font-weight: bolder;
-    padding-inline: 40px;
-    background-color: lime;
-}
-
-.user_card:hover{
-    fill: black;
-    color: black;
+    justify-content: space-between;
+    border: 2px solid gray;
+    border-radius: 10px;
     text-decoration: none;
-    cursor: pointer;
 }
 
-.user_card div{
+.card_options .user_card{
+    border: none;
+    border: 2px solid dodgerblue !important;
+}
+
+.user_card_body {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    fill: white;
+    background-color: dodgerblue;
+    border-radius: 8px 8px 0px 0px;
+    padding: 10px 20px;
+    text-align: right;
+}
+
+.user_card_body div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user_card_footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+    padding: 10px 20px;
+    background-color: whitesmoke;
+    font-size: var(--font_card_size);
+    font-weight: bold;
+    color: dodgerblue;
+    border-radius: 0px 0px 10px 10px;
+    text-decoration: none !important;
 }
 
-.user_card div:first-child{
-    padding-bottom: 30px;
-    border-bottom: 8px solid white;
+.user_card_footer p {
+    margin: 0;
+}
+
+.count_card_value{
+    font-size: var(--font_card_count);
+    margin-top: 10px;
 }
 
 .sales_card {

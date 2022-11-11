@@ -28,8 +28,8 @@ namespace TodaHora.Models
         public Nullable<int> Sexo_Id { get; set; }
         public string Telefone { get; set; }
     
+        public virtual Sexo Sexo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
-        public virtual Sexo Sexo { get; set; }
     }
 }
