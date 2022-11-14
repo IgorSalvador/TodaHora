@@ -9,10 +9,19 @@
     <Property Name="Sobrenome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="DataNascimento" Type="DateTime" Precision="3" />
     <Property Name="Cpf" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__Pessoa___2A4B4B5E" FromRole="Pessoa" ToRole="Usuario" />
     <Property Name="Sexo_Id" Type="Int32" />
-    <NavigationProperty Name="Sexo" Relationship="dbTodaHoraModel.FK__Pessoa__Sexo_Id__36B12243" FromRole="Pessoa" ToRole="Sexo" />
     <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Sexo" Relationship="Self.FK__Pessoa__Sexo_Id__3B75D760" FromRole="Pessoa" ToRole="Sexo" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__Pessoa___3C69FB99" FromRole="Pessoa" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Sexo">
+    <Key>
+      <PropertyRef Name="Sexo_Id" />
+    </Key>
+    <Property Name="Sexo_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="blnAtivo" Type="Boolean" />
+    <NavigationProperty Name="Pessoa" Relationship="Self.FK__Pessoa__Sexo_Id__3B75D760" FromRole="Sexo" ToRole="Pessoa" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -27,10 +36,22 @@
     <Property Name="Data_alteracao" Type="DateTime" Precision="3" />
     <Property Name="UsuarioAlteracao" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Pessoa_Id" Type="Int32" />
-    <NavigationProperty Name="Pessoa" Relationship="Self.FK__Usuario__Pessoa___2A4B4B5E" FromRole="Usuario" ToRole="Pessoa" />
-    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Pessoa" Relationship="Self.FK__Usuario__Pessoa___3C69FB99" FromRole="Usuario" ToRole="Pessoa" />
   </EntityType>
-  <Association Name="FK__Usuario__Pessoa___2A4B4B5E">
+  <Association Name="FK__Pessoa__Sexo_Id__3B75D760">
+    <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />
+    <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sexo">
+        <PropertyRef Name="Sexo_Id" />
+      </Principal>
+      <Dependent Role="Pessoa">
+        <PropertyRef Name="Sexo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuario__Pessoa___3C69FB99">
     <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -44,36 +65,15 @@
   </Association>
   <EntityContainer Name="dbTodaHoraEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Pessoa" EntityType="Self.Pessoa" />
+    <EntitySet Name="Sexo" EntityType="Self.Sexo" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-    <AssociationSet Name="FK__Usuario__Pessoa___2A4B4B5E" Association="Self.FK__Usuario__Pessoa___2A4B4B5E">
-      <End Role="Pessoa" EntitySet="Pessoa" />
-      <End Role="Usuario" EntitySet="Usuario" />
-    </AssociationSet>
-    <EntitySet Name="Sexo" EntityType="dbTodaHoraModel.Sexo" />
-    <AssociationSet Name="FK__Pessoa__Sexo_Id__36B12243" Association="dbTodaHoraModel.FK__Pessoa__Sexo_Id__36B12243">
+    <AssociationSet Name="FK__Pessoa__Sexo_Id__3B75D760" Association="Self.FK__Pessoa__Sexo_Id__3B75D760">
       <End Role="Sexo" EntitySet="Sexo" />
       <End Role="Pessoa" EntitySet="Pessoa" />
     </AssociationSet>
+    <AssociationSet Name="FK__Usuario__Pessoa___3C69FB99" Association="Self.FK__Usuario__Pessoa___3C69FB99">
+      <End Role="Pessoa" EntitySet="Pessoa" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Sexo">
-    <Key>
-      <PropertyRef Name="Sexo_Id" />
-    </Key>
-    <Property Name="Sexo_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="blnAtivo" Type="Boolean" />
-    <NavigationProperty Name="Pessoa" Relationship="dbTodaHoraModel.FK__Pessoa__Sexo_Id__36B12243" FromRole="Sexo" ToRole="Pessoa" />
-  </EntityType>
-  <Association Name="FK__Pessoa__Sexo_Id__36B12243">
-    <End Type="dbTodaHoraModel.Sexo" Role="Sexo" Multiplicity="0..1" />
-    <End Type="dbTodaHoraModel.Pessoa" Role="Pessoa" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Sexo">
-        <PropertyRef Name="Sexo_Id" />
-      </Principal>
-      <Dependent Role="Pessoa">
-        <PropertyRef Name="Sexo_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

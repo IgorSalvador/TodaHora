@@ -4,20 +4,28 @@
     <EntitySetMapping Name="Pessoa">
       <EntityTypeMapping TypeName="dbTodaHoraModel.Pessoa">
         <MappingFragment StoreEntitySet="Pessoa">
-          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
-          <ScalarProperty Name="Sexo_Id" ColumnName="Sexo_Id" />
           <ScalarProperty Name="Pessoa_Id" ColumnName="Pessoa_Id" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="Sobrenome" ColumnName="Sobrenome" />
           <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
           <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+          <ScalarProperty Name="Sexo_Id" ColumnName="Sexo_Id" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sexo">
+      <EntityTypeMapping TypeName="dbTodaHoraModel.Sexo">
+        <MappingFragment StoreEntitySet="Sexo">
+          <ScalarProperty Name="Sexo_Id" ColumnName="Sexo_Id" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="blnAtivo" ColumnName="blnAtivo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="dbTodaHoraModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
-          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Senha" ColumnName="Senha" />
@@ -27,15 +35,7 @@
           <ScalarProperty Name="Data_alteracao" ColumnName="Data_alteracao" />
           <ScalarProperty Name="UsuarioAlteracao" ColumnName="UsuarioAlteracao" />
           <ScalarProperty Name="Pessoa_Id" ColumnName="Pessoa_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Sexo">
-      <EntityTypeMapping TypeName="dbTodaHoraModel.Sexo">
-        <MappingFragment StoreEntitySet="Sexo">
-          <ScalarProperty Name="blnAtivo" ColumnName="blnAtivo" />
-          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-          <ScalarProperty Name="Sexo_Id" ColumnName="Sexo_Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
