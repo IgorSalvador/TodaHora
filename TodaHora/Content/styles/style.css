@@ -30,30 +30,46 @@
     text-decoration: none;
 }
 
-.card_options .user_card{
+.card_options .user_card, .product_card, .marcas_card{
     border: none;
-    border: 2px solid dodgerblue !important;
+    border: 2px solid gray !important;
 }
 
-.user_card_body {
+.user_card_body, .product_card_body, .marcas_card_body, .sales_card_body {
     flex: 1;
     display: flex;
     justify-content: space-between;
     color: white;
     fill: white;
-    background-color: dodgerblue;
     border-radius: 8px 8px 0px 0px;
     padding: 10px 20px;
     text-align: right;
 }
 
-.user_card_body div{
+.user_card_body {
+    background-color: #990b0b;
+}
+
+.product_card_body {
+    background-color: #c30909;
+}
+
+.marcas_card_body {
+    fill: white;
+    background-color: #f41515;
+}
+
+.sales_card_body {
+    background-color: #f75959;
+}
+
+.user_card_body div, .product_card_body div, .marcas_card_body div, .sales_card_body div{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.user_card_footer {
+.user_card_footer, .product_card_footer, .marcas_card_footer, .sales_card_footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,12 +77,28 @@
     background-color: whitesmoke;
     font-size: var(--font_card_size);
     font-weight: bold;
-    color: dodgerblue;
     border-radius: 0px 0px 10px 10px;
     text-decoration: none !important;
 }
 
-.user_card_footer p {
+.user_card_footer {
+    color: #990b0b;
+}
+
+.product_card_footer {
+    color: #c30909;
+}
+
+.marcas_card_footer {
+    color: #f41515;
+}
+
+.sales_card_footer {
+    color: #f75959;
+}
+
+
+.user_card_footer p, .product_card_footer p, .marcas_card_footer p, .sales_card_footer p{
     margin: 0;
 }
 
@@ -81,7 +113,21 @@
     max-width: 1400px;
 }
 
-@media (max-width: 1420px){
+.user_wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-inline: 10%;
+}
+
+.user_wrapper h1{
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+
+@media (max-width: 1420px) {
     .system_options_wrapper{
         justify-content: center;
         gap: 50px;

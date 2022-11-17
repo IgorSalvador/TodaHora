@@ -17,7 +17,7 @@ namespace TodaHora.Controllers
         // GET: Usuario
         public ActionResult Index()
         {
-            return View();
+            return View(dbTodaHora.Usuario.ToList().Take(100));
         }
 
         public ActionResult UserProfile(int user_Id)

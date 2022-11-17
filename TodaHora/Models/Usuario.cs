@@ -18,8 +18,8 @@ namespace TodaHora.Models
         public string Username { get; set; }
         public string Senha { get; set; }
         public Nullable<System.DateTime> Data_Inclusao { get; set; }
-        public Nullable<bool> blnAtivo { get; set; }
-        public Nullable<bool> blnAdmin { get; set; }
+        public bool blnAtivo { get; set; }
+        public bool blnAdmin { get; set; }
         public Nullable<System.DateTime> Data_alteracao { get; set; }
         public string UsuarioAlteracao { get; set; }
         public Nullable<int> Pessoa_Id { get; set; }

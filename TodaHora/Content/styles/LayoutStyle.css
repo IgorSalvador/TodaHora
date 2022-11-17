@@ -76,6 +76,8 @@ main {
     height: 100%;
     margin-bottom: 95px;
     display: flex;
+    justify-content: center;
+
 }
 
 footer {
