@@ -46,7 +46,7 @@ header {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 
@@ -143,4 +143,10 @@ footer {
 
 .contacts ul li a{
     color: black;
+}
+
+@media (max-width: 850px){
+    header{
+        padding-inline: 15px;
+    }
 }

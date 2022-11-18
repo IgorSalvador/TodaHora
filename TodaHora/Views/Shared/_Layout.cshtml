@@ -78,6 +78,16 @@
     </footer>
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/bootstrap.js"></script>
+    <script>
+
+        $(document).on('keydown', function (e) {
+            if (e.keyCode == 44) { //print screen button
+                $('body').hide();
+            }
+        }).on('keyup', function () {
+            $('body').show();
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
