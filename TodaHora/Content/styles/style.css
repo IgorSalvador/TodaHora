@@ -9,16 +9,6 @@ body {
     --font_card_count: 40px;
 }
 
-.btn_create_new_element{
-    width: 200px;
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-weight: bold;
-}
-
 .system_options_wrapper {
     width: 100%;
     min-width: 500px;
@@ -68,7 +58,7 @@ body {
 
 .marcas_card_body {
     fill: white;
-    background-color: #f41515;
+    background-color: #e84f4f;
 }
 
 .sales_card_body {
@@ -102,7 +92,7 @@ body {
 }
 
 .marcas_card_footer {
-    color: #f41515;
+    color: #e84f4f;
 }
 
 .sales_card_footer {
@@ -130,7 +120,6 @@ body {
     flex-direction: column;
     width: 100%;
     margin-inline: 50px;
-    margin-top: 50px;
     padding: 20px;
 }
 
@@ -139,11 +128,14 @@ body {
 .user_wrapper h1 {
     font-size: 32px;
     font-weight: bolder;
+    margin-left: 10px;
 }
 
 .wrapper_user_filter{
     width: 100%;
-    margin-top: 30px;
+    margin-top: 10px;
+    padding-top: 30px;
+    border-top: 1px solid lightgray;
 }
 
 .filter_form_wrapper{
@@ -166,8 +158,8 @@ body {
 
 
 .filter_inputs label span{
-    margin-left: 10px;
-    font-weight: bold;
+    margin-bottom: 10px;
+    font-weight: 400;
 }
 
 
@@ -180,15 +172,37 @@ body {
 
 .filter_buttons{
     width: 100%;
-    margin-top: 20px;
+    margin-top: 30px;
     display: flex;
     gap: 20px;
     justify-content: flex-end;
 }
 
+.filter_buttons a{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter_buttons button{
+    min-width: 100px;
+    padding: 5px 20px 5px 20px;
+}
+
+.filter_buttons a{
+    min-width: 100px;
+    padding: 5px 20px 5px 20px;
+}
+
+.filter_buttons .btn:hover{
+    background-color: #480f10;
+    border-color: #480f10;
+}
+
 .wrapper_user_list {
     width: 100%;
-    margin-top: 50px;
+    margin-top: 30px;
     overflow-x: auto;
 }
 
@@ -211,6 +225,7 @@ body {
     font-size: 1.1em;
     letter-spacing: .1em;
     text-transform: uppercase;
+    font-weight: 400;
 }
 
 .user_list th, td{
@@ -218,6 +233,15 @@ body {
     text-align: center;
     white-space: nowrap;
 }
+
+.wrapper_edit_details{
+    width: 100%;
+    margin-inline: 10%;
+    display: flex;
+    flex-direction: column;
+}
+
+
 
 
 

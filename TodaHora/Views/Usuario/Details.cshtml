@@ -1,0 +1,66 @@
+﻿@model TodaHora.Models.Usuario
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var dataNascimento = Model.Pessoa.DataNascimento.Value.ToShortDateString();
+}
+
+<div class="wrapper_edit_details">
+
+
+    <h2>Detalhes</h2>
+
+    <div class="form-group">
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.Nome, "Nome", new { @class = "" })
+            @Html.TextBoxFor(m => m.Pessoa.Nome, new { @class = "", disabled = "true" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.Sobrenome, "Sobrenome", new { @class = "" })
+            @Html.TextBoxFor(m => m.Pessoa.Sobrenome, new { @class = "", disabled = "true" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.DataNascimento, new { @class = "" })
+            <input type="datetime" value="@dataNascimento" disabled class="" />
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.Cpf, "CPF", new { @class = "" })
+            @Html.TextBoxFor(m => m.Pessoa.Cpf, new { @class = "", disabled = "true" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.Telefone, "Telefone", new { @class = "" })
+            @Html.TextBoxFor(m => m.Pessoa.Telefone, new { @class = "", disabled = "true" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.Sexo.Descricao, "Sexo", new { @class = "" })
+            @Html.TextBoxFor(m => m.Pessoa.Sexo.Descricao, new { @class = "", disabled = "true" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Username, "Username", new { @class = "" })
+            @Html.TextBoxFor(m => m.Username, new { @class = "", disabled = "true" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Email, "E-mail", new { @class = "" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "", disabled = "true" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.blnAdmin, "Administrador", new { @class = "" })
+            @Html.CheckBoxFor(m => m.blnAdmin, new { @class = "", disabled = "true" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.blnAtivo, "Ativo", new { @class = "" })
+            @Html.CheckBoxFor(m => m.blnAtivo, new { @class = "", disabled = "true" })
+        </div>
+    </div>
+</div>
+
