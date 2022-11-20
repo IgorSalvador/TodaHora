@@ -10,43 +10,52 @@
     <h1>Edição de usuário</h1>
 
     <div class="actions_buttons">
-        <button class="btn" disabled>Salvar</button>
-        <button class="btn">Editar</button>
-        <button class="btn">Desativar</button>
+        <button class="btn" id="btn_save" disabled>Salvar</button>
+        <button class="btn" id="btn_edit">Editar</button>
+        @if (Model.blnAtivo == true)
+        {
+            <button class="btn" id="btn_disable_user">Desativar</button>
+        }
+        else
+        {
+            <button class="btn" id="btn_enable_user">Ativar</button>
+        }
         <a href="@Url.Action("Index", "Usuario")" class="btn">Voltar à lista</a>
     </div>
 
     <div class="form_group">
 
         <div class="form_group_inputs details_inputs">
+            @Html.HiddenFor(m => m.Usuario_Id)
+
             <div>
-                @Html.LabelFor(m => m.Pessoa.Nome, "Nome", new { @class = "" })
-                @Html.TextBoxFor(m => m.Pessoa.Nome, new { @class = "", disabled = "true" })
+                @Html.LabelFor(m => m.Pessoa.Nome, "Nome")
+                @Html.TextBoxFor(m => m.Pessoa.Nome, new { @class = "form-control Nome", disabled = "true" })
             </div>
 
             <div>
-                @Html.LabelFor(m => m.Pessoa.Sobrenome, "Sobrenome", new { @class = "" })
-                @Html.TextBoxFor(m => m.Pessoa.Sobrenome, new { @class = "", disabled = "true" })
+                @Html.LabelFor(m => m.Pessoa.Sobrenome, "Sobrenome")
+                @Html.TextBoxFor(m => m.Pessoa.Sobrenome, new { @class = "form-control Sobrenome", disabled = "true" })
             </div>
 
             <div>
                 @Html.LabelFor(m => m.Pessoa.DataNascimento, "Data de Nascimento", new { @class = "" })
-                <input type="datetime" class="" id="Pessoa.DataNascimento" name="Pessoa.DataNascimento" value="@Model.Pessoa.DataNascimento.Value.ToShortDateString()" disabled />
+                <input type="date" class="form-control DataNascimento" id="Pessoa.DataNascimento" name="Pessoa.DataNascimento" value="@Convert.ToDateTime(Model.Pessoa.DataNascimento).ToString("yyyy-MM-dd")" disabled />
             </div>
 
             <div>
-                @Html.LabelFor(m => m.Pessoa.Cpf, "CPF", new { @class = "" })
-                @Html.TextBoxFor(m => m.Pessoa.Cpf, new { @class = "cpf", disabled = "true" })
+                @Html.LabelFor(m => m.Pessoa.Cpf, "CPF")
+                @Html.TextBoxFor(m => m.Pessoa.Cpf, new { @class = "form-control Cpf", disabled = "true" })
             </div>
 
             <div>
-                @Html.LabelFor(m => m.Pessoa.Telefone, "Telefone", new { @class = "" })
-                @Html.TextBoxFor(m => m.Pessoa.Telefone, new { @class = "telefone", disabled = "true" })
+                @Html.LabelFor(m => m.Pessoa.Telefone, "Telefone")
+                @Html.TextBoxFor(m => m.Pessoa.Telefone, new { @class = "form-control Telefone", disabled = "true" })
             </div>
 
             <div>
-                @Html.LabelFor(m => m.Pessoa.Sexo.Descricao, "Sexo", new { @class = "" })
-                <select id="Pessoa.Sexo" name="Pessoa.Sexo" disabled>
+                @Html.LabelFor(m => m.Pessoa.Sexo.Descricao, "Sexo")
+                <select id="Pessoa.Sexo" name="Pessoa.Sexo" class="form-control Sexo" disabled>
                     @foreach (var sexo in ViewBag.SexoList)
                     {
 
@@ -64,29 +73,39 @@
             </div>
 
             <div>
-                @Html.LabelFor(m => m.Username, "Username", new { @class = "" })
-                @Html.TextBoxFor(m => m.Username, new { @class = "", disabled = "true" })
+                @Html.LabelFor(m => m.Username, "Username")
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control Username", disabled = "true" })
             </div>
 
             <div>
-                @Html.LabelFor(m => m.Email, "E-mail", new { @class = "" })
-                @Html.TextBoxFor(m => m.Email, new { @class = "", disabled = "true" })
+                @Html.LabelFor(m => m.Email, "E-mail")
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control Email", disabled = "true" })
             </div>
 
             <div>
-                @Html.LabelFor(m => m.blnAdmin, "Perfil", new { @class = "" })
-                @if (Model.blnAdmin == true)
-                {<input type="text" value="Administrador" disabled /> }
-                else
-                { <input type="text" value="Usuário" disabled />}
+                @Html.LabelFor(m => m.blnAdmin, "Perfil")
+
+                <select id="blnAdmin" name="blnAdmin" class="form-control blnAdmin" disabled>
+                    @if (Model.blnAdmin == true)
+                    {
+                        <option value="1" selected>Administrador</option>
+                        <option value="0">Usuário</option>
+                    }
+                    else
+                    {
+                        <option value="1">Administrador</option>
+                        <option value="0" selected>Usuário</option>
+                    }
+                </select>
+
             </div>
 
             <div>
                 @Html.LabelFor(m => m.blnAtivo, "Status", new { @class = "" })
                 @if (Model.blnAtivo == true)
-                {<input type="text" value="Ativo" disabled /> }
+                {<input type="text" value="Ativo" class="form-control" disabled /> }
                 else
-                { <input type="text" value="Inativo" disabled />}
+                { <input type="text" value="Inativo" class="form-control" disabled />}
             </div>
         </div>
 
@@ -100,10 +119,67 @@
 
         $(document).ready(function () {
 
-            $(".telefone").mask("(00) 00000-0000");
-            $(".cpf").mask("000.000.000-00");
+            $(".Telefone").mask("(00) 00000-0000");
+            $(".Cpf").mask("000.000.000-00");
 
+            $("#btn_edit").on("click", function () {
+                document.querySelector("#btn_save").disabled = false;
+                document.querySelector(".Nome").disabled = false;
+                document.querySelector(".Sobrenome").disabled = false;
+                document.querySelector(".DataNascimento").disabled = false;
+                document.querySelector(".Cpf").disabled = false;
+                document.querySelector(".Telefone").disabled = false;
+                document.querySelector(".Sexo").disabled = false;
+                document.querySelector(".Username").disabled = false;
+                document.querySelector(".Email").disabled = false;
+                document.querySelector(".blnAdmin").disabled = false;
+            });
 
+            $("#btn_disable_user").on("click", function () {
+                let settings = {
+                        "url": "@Url.Action("DisableUser", "Usuario")",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "data": JSON.stringify({
+                            "usuario_Id": document.querySelector("#Usuario_Id").value,
+                        }),
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        if (response == true) {
+                            window.location.reload();
+                        }
+                        else {
+                            alert(response);
+                        }
+                    });
+            });
+
+            $("#btn_enable_user").on("click", function () {
+                let settings = {
+                        "url": "@Url.Action("EnableUser", "Usuario")",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "data": JSON.stringify({
+                            "usuario_Id": document.querySelector("#Usuario_Id").value,
+                        }),
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        if (response == true) {
+                            window.location.reload();
+                        }
+                        else {
+                            alert(response);
+                        }
+                    });
+            });
 
         });
     </script>

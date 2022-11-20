@@ -28,6 +28,55 @@ namespace TodaHora.Models.ViewModel
         private dbTodaHoraEntities db = new dbTodaHoraEntities();
         private List<Usuario> ListUser = new List<Usuario>();
 
+        public List<Usuario> DisableUser(UserViewModel UserUpdate)
+        {
+            try
+            {
+                //Recupera os cookies para salvar informações no banco referente a alteração
+                LoginCookiesAtual.getCookies();
+
+                var usuario = db.Usuario.Find(UserUpdate.Usuario_Id);
+
+                usuario.blnAtivo = false;
+                usuario.Data_alteracao = DateTime.Now;
+                usuario.UsuarioAlteracao = LoginCookiesAtual.username;
+
+                db.Entry(usuario).State = EntityState.Modified;
+                db.SaveChanges();
+
+                ListUser.Add(usuario);
+                return ListUser.ToList();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Erro " + ex);
+            }
+        }
+        public List<Usuario> EnableUser(UserViewModel UserUpdate)
+        {
+            try
+            {
+                //Recupera os cookies para salvar informações no banco referente a alteração
+                LoginCookiesAtual.getCookies();
+
+                var usuario = db.Usuario.Find(UserUpdate.Usuario_Id);
+
+                usuario.blnAtivo = true;
+                usuario.Data_alteracao = DateTime.Now;
+                usuario.UsuarioAlteracao = LoginCookiesAtual.username;
+
+                db.Entry(usuario).State = EntityState.Modified;
+                db.SaveChanges();
+
+                ListUser.Add(usuario);
+                return ListUser.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro " + ex);
+            }
+        }
+
         public List<Usuario> EditProfile(UserViewModel UserUpdate)
         {
             try
@@ -44,7 +93,7 @@ namespace TodaHora.Models.ViewModel
                 usuario.Pessoa.Telefone = UserUpdate.Telefone;
                 usuario.Pessoa.Sexo_Id = UserUpdate.Sexo_Id;
                 usuario.Data_alteracao = DateTime.Now;
-                usuario.UsuarioAlteracao = LoginCookiesAtual.nome;
+                usuario.UsuarioAlteracao = LoginCookiesAtual.username;
 
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
@@ -70,7 +119,7 @@ namespace TodaHora.Models.ViewModel
                 usuario.Username = UserUpdate.Username;
                 usuario.Email = UserUpdate.Email;
                 usuario.Data_alteracao = DateTime.Now;
-                usuario.UsuarioAlteracao = LoginCookiesAtual.nome;
+                usuario.UsuarioAlteracao = LoginCookiesAtual.username;
 
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
@@ -95,7 +144,7 @@ namespace TodaHora.Models.ViewModel
 
                 usuario.Senha = UserUpdate.Password;
                 usuario.Data_alteracao = DateTime.Now;
-                usuario.UsuarioAlteracao = LoginCookiesAtual.nome;
+                usuario.UsuarioAlteracao = LoginCookiesAtual.username;
 
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();

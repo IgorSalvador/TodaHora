@@ -23,14 +23,14 @@ namespace TodaHora.Controllers
 
         public ActionResult Edit(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             Usuario usuario = dbTodaHora.Usuario.Find(id);
 
-            if(usuario == null)
+            if (usuario == null)
             {
                 return HttpNotFound();
             }
@@ -65,6 +65,52 @@ namespace TodaHora.Controllers
             return View(dbTodaHora.Usuario.Where(m => m.Usuario_Id == user_Id).ToList());
         }
 
+        #region :: Ajax functions ::
+
+        [HttpPost]
+        [AllowAnonymous]
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
+        public JsonResult DisableUser(int usuario_Id)
+        {
+            UserViewModel Usuario = new UserViewModel();
+
+            try
+            {
+                Usuario.Usuario_Id = usuario_Id;
+
+                var ListagemUsuario = Usuario.DisableUser(Usuario);
+
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+
+            catch (Exception ex)
+            {
+                return Json(ex, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
+        public JsonResult EnableUser(int usuario_Id)
+        {
+            UserViewModel Usuario = new UserViewModel();
+
+            try
+            {
+                Usuario.Usuario_Id = usuario_Id;
+
+                var ListagemUsuario = Usuario.EnableUser(Usuario);
+
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+
+            catch (Exception ex)
+            {
+                return Json(ex, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
@@ -83,7 +129,7 @@ namespace TodaHora.Controllers
 
                 var ListagemUsuario = Usuario.EditProfile(Usuario);
 
-                if(ListagemUsuario.Count > 0)
+                if (ListagemUsuario.Count > 0)
                 {
                     Cookies cookíe = new Cookies();
 
@@ -94,15 +140,15 @@ namespace TodaHora.Controllers
                     else
                     {
                         throw new Exception("Erro ao atualizar cookies, após atualização do perfil");
-                    }     
+                    }
                 }
                 else
                 {
                     throw new Exception("Erro ao realizar a atualização do perfil");
                 }
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(ex, JsonRequestBehavior.AllowGet);
             }
@@ -179,10 +225,12 @@ namespace TodaHora.Controllers
                     throw new Exception("Erro ao realizar a atualização do perfil");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(ex, JsonRequestBehavior.AllowGet);
             }
         }
+
+        #endregion
     }
 }

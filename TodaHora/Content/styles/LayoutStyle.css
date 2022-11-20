@@ -107,9 +107,9 @@ footer {
 
 .help ul {
     display: flex;
-    flex-direction: column;
+/*    flex-direction: column;*/
     justify-content: center;
-    gap: 5px;
+    gap: 15px;
     padding: 0;
 }
 
@@ -149,5 +149,9 @@ footer {
 @media (max-width: 850px){
     header{
         padding-inline: 15px;
+    }
+
+    .help ul{
+        flex-direction: column;
     }
 }
