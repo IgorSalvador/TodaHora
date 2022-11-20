@@ -28,6 +28,35 @@ namespace TodaHora.Models.ViewModel
         private dbTodaHoraEntities db = new dbTodaHoraEntities();
         private List<Usuario> ListUser = new List<Usuario>();
 
+        public List<Usuario> EditUserInfo(UserViewModel UserUpdate)
+        {
+            try
+            {
+                //Recupera os cookies para salvar informações no banco referente a alteração
+                LoginCookiesAtual.getCookies();
+
+                var usuario = db.Usuario.Find(UserUpdate.Usuario_Id);
+
+                usuario.Pessoa.Nome = UserUpdate.Nome;
+                usuario.Pessoa.Sobrenome = UserUpdate.Sobrenome;
+                usuario.Pessoa.DataNascimento = UserUpdate.DataNascimento;
+                usuario.Pessoa.Cpf = UserUpdate.Cpf;
+                usuario.Pessoa.Telefone = UserUpdate.Telefone;
+                usuario.Pessoa.Sexo_Id = UserUpdate.Sexo_Id;
+                usuario.blnAdmin = UserUpdate.blnAdmin;
+
+                db.Entry(usuario).State = EntityState.Modified;
+                db.SaveChanges();
+
+                ListUser.Add(usuario);
+                return ListUser.ToList();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Erro " + ex);
+            }
+        }
+
         public List<Usuario> DisableUser(UserViewModel UserUpdate)
         {
             try

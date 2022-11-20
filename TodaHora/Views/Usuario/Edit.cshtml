@@ -181,6 +181,43 @@
                     });
             });
 
+            $("#btn_save").on("click", function () {
+                if (document.querySelector(".Nome").value != "" && document.querySelector(".Sobrenome").value != "" && document.querySelector(".DataNascimento").value != "" && document.querySelector(".Cpf").value != "" && document.querySelector(".Telefone").value != "" && document.querySelector(".Sexo").value != "" && document.querySelector(".Username").value != "" && document.querySelector(".Email").value != "" && document.querySelector(".blnAdmin").value != "") {
+                    let settings = {
+                        "url": "@Url.Action("EditUserInfo", "Usuario")",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "data": JSON.stringify({
+                            "Usuario_Id": document.querySelector("#Usuario_Id").value,
+                            "Nome": document.querySelector(".Nome").value,
+                            "Sobrenome": document.querySelector(".Sobrenome").value,
+                            "DataNascimento": document.querySelector(".DataNascimento").value,
+                            "CPF": document.querySelector(".Cpf").value,
+                            "Telefone": document.querySelector(".Telefone").value,
+                            "Sexo_Id": document.querySelector(".Sexo").value,
+                            "Username": document.querySelector(".Username").value,
+                            "Email": document.querySelector(".Email").value,
+                            "blnAdmin": document.querySelector(".blnAdmin").value
+                        }),
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        if (response == true) {
+                            window.location.reload();
+                        }
+                        else {
+                            alert(response);
+                        }
+                    });
+                }
+                else {
+                    alert("Preencha todos os campos para realizar a edição.")
+                }
+            });
+
         });
     </script>
 }

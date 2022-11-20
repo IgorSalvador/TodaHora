@@ -15,28 +15,28 @@
             <div class="filter_inputs">
                 <label>
                     <span>Nome:</span>
-                    <input type="text" name="txtNome" value="@ViewBag.txtNome" required />
+                    <input type="text" name="txtNome" value="@ViewBag.txtNome" />
                 </label>
 
                 <label>
                     <span>Username:</span>
-                    <input type="text" name="txtNomeUsuario" value="@ViewBag.txtNomeUsuario" required />
+                    <input type="text" name="txtNomeUsuario" value="@ViewBag.txtNomeUsuario" />
                 </label>
 
                 <label>
                     <span>E-mail:</span>
-                    <input type="email" name="txtEmail" value="@ViewBag.txtEmail" required />
+                    <input type="email" name="txtEmail" value="@ViewBag.txtEmail" />
                 </label>
 
                 <label>
                     <span>Telefone:</span>
-                    <input type="tel" name="txtTelefone" value="@ViewBag.txtTelefone" required class="telefone" />
+                    <input type="tel" name="txtTelefone" value="@ViewBag.txtTelefone" class="telefone" />
                 </label>
             </div>
 
             <div class="filter_buttons">
 
-                <a href="@Url.Action()" class="btn btn-success">
+                <a href="@Url.Action("Create", "Usuario")" class="btn btn-success">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
                         <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
@@ -45,7 +45,7 @@
                     Novo usuário
                 </a>
                 <button class="btn btn-danger">Buscar</button>
-                <a class="btn btn-dark">Limpar</a>
+                <a class="btn btn-dark" id="btn_limpar">Limpar</a>
             </div>
 
         </form>
@@ -134,7 +134,9 @@
 
             $(".telefone").mask("(00) 00000-0000");
 
-
+            $("#btn_limpar").on("click", function () {
+                // Adicionar limpeza de filtro
+            });
 
         });
     </script>

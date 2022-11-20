@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.UI;
 using TodaHora.Models;
@@ -19,6 +20,55 @@ namespace TodaHora.Controllers
         public ActionResult Index()
         {
             return View(dbTodaHora.Usuario.ToList().Take(100));
+        }
+
+        [HttpPost]
+        public ActionResult Index(string txtNome, string txtNomeUsuario, string txtEmail, string txtTelefone)
+        {
+            bool blnNome = !string.IsNullOrWhiteSpace(txtNome);
+            bool blnNomeUsuario = !string.IsNullOrWhiteSpace(txtNomeUsuario);
+            bool blnEmail = !string.IsNullOrWhiteSpace(txtEmail);
+            bool blnTelefone = !string.IsNullOrWhiteSpace(txtTelefone);
+
+            #region :: Removing Formatations ::
+
+            var nome = txtNome;
+            var username = txtNomeUsuario.Trim();
+            var email = txtEmail.Trim();
+            var telefone = txtTelefone.Replace(")", "").Replace("(", "").Replace("-", "").Replace(" ", "").Trim();
+
+            #endregion
+
+            if (!blnNome && !blnNomeUsuario && !blnEmail && !blnTelefone)
+                return RedirectToAction("Index");
+
+            List<Usuario> listUsers = dbTodaHora.Usuario.ToList();
+
+            if (blnNome)
+            {
+                ViewBag.txtNome = nome;
+                listUsers = listUsers.Where(item => item.Pessoa.Nome.ToUpper().Contains(nome.ToUpper())).ToList();
+            }
+
+            if (blnNomeUsuario)
+            {
+                ViewBag.txtNomeUsuario = username;
+                listUsers = listUsers.Where(item => item.Username.ToUpper().Contains(username.ToUpper())).ToList();
+            }
+
+            if (blnEmail)
+            {
+                ViewBag.txtEmail = email;
+                listUsers = listUsers.Where(item => item.Email.ToUpper().Contains(email.ToUpper())).ToList();
+            }
+
+            if (blnTelefone)
+            {
+                ViewBag.txtTelefone = telefone;
+                listUsers = listUsers.Where(item => item.Pessoa.Telefone.ToUpper().Contains(telefone.ToUpper())).ToList();
+            }
+
+            return View(listUsers.OrderByDescending(item => item.Usuario_Id));
         }
 
         public ActionResult Edit(int? id)
@@ -66,6 +116,52 @@ namespace TodaHora.Controllers
         }
 
         #region :: Ajax functions ::
+
+        [HttpPost]
+        [AllowAnonymous]
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
+        public JsonResult EditUserInfo(int Usuario_Id, string Nome, string Sobrenome, DateTime DataNascimento, string CPF, string Telefone, int Sexo_Id, string Username, string Email, int blnAdmin)
+        {
+            UserViewModel Usuario = new UserViewModel();
+
+            try
+            {
+                Usuario.Usuario_Id = Usuario_Id;
+                Usuario.Nome = Nome;
+                Usuario.Sobrenome = Sobrenome;
+                Usuario.DataNascimento = DataNascimento;
+                Usuario.Cpf = CPF.Replace("-", "").Replace(".", "").Trim();
+                Usuario.Telefone = Telefone.Replace(")", "").Replace("(", "").Replace("-", "").Replace(" ", "").Trim();
+                Usuario.Sexo_Id = Sexo_Id; ;
+                Usuario.Username = Username;
+                Usuario.blnAdmin = blnAdmin == 1 ? true : false;
+
+                var ListagemUsuario = Usuario.EditUserInfo(Usuario);
+
+                if (ListagemUsuario.Count > 0)
+                {
+                    Cookies cookíe = new Cookies();
+
+                    if (cookíe.reloadCookies(Usuario_Id))
+                    {
+                        return Json(true, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        throw new Exception("Erro ao atualizar cookies, após atualização do perfil");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Erro ao realizar a atualização do perfil");
+                }
+
+            }
+            catch(Exception ex)
+            {
+                return Json(ex, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         [HttpPost]
         [AllowAnonymous]
