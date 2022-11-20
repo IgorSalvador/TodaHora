@@ -100,13 +100,13 @@ namespace TodaHora.Models
                 cookie.Values.Add("user_Id", UsuarioSystem.Usuario_Id.ToString());
                 cookie.Values.Add("username", UsuarioSystem.Username);
                 cookie.Values.Add("email", UsuarioSystem.Email);
-                cookie.Values.Add("nome", $"{UsuarioSystem.Pessoa.Nome} {UsuarioSystem.Pessoa.Sobrenome}");
+                cookie.Values.Add("nome", UsuarioSystem.Pessoa.Nome);
                 if (UsuarioSystem.blnAdmin == true)
                     cookie.Values.Add("IsAdmin", "S");
                 else
                     cookie.Values.Add("isAdmin", "N");
                 cookie.Values.Add("isLoggedIn", "S");
-                cookie.Expires = DateTime.Now.AddHours(1);
+                cookie.Expires = DateTime.Now.AddHours(5);
 
                 //Definindo segurança do cookie
                 cookie.HttpOnly = true;

@@ -51,24 +51,23 @@ header {
 
 
 .profile-info:hover svg {
-    fill: var(--font-red);
+    fill: #480f10;
 }
 
 .user-name {
     font-size: 18px;
-    font-weight: bold;
-    text-transform: uppercase;
+    font-weight: 400;
     text-decoration: none;
     color: black;
 }
 
 
 .profile-info:hover .user-name {
-    color: var(--font-red);
+    color: #480f10;
 }
 
 .LogOut:hover svg path {
-    fill: var(--font-red);
+    fill: #480f10;
 }
 
 main {
@@ -98,12 +97,10 @@ footer {
 .help {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 5px;
 }
 
-.help h4{
+.help h5{
     font-weight: 500;
     font-family: var(--inter-font);
 }
@@ -113,6 +110,7 @@ footer {
     flex-direction: column;
     justify-content: center;
     gap: 5px;
+    padding: 0;
 }
 
 .help ul li {

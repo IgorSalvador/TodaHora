@@ -4,9 +4,100 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-:root{
+:root {
     --font_card_size: 16px;
     --font_card_count: 40px;
+    --hover_color: #480f10;
+}
+
+select{
+    height: 38px;
+    border-width: 2px;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bolder;
+}
+
+.wrapper_default{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 2rem 8rem;
+}
+
+.form_group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.form_group_inputs {
+    display: flex;
+    flex-direction: row;
+}
+
+.form_group_inputs div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.actions_buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    padding-block: 1rem;
+    border-top: 1px solid lightgray;
+}
+
+.actions_buttons .btn{
+    min-width: 100px;
+    background-color: whitesmoke;
+}
+
+.btn:hover {
+    color: white;
+    background-color: var(--hover_color);
+    border-color: var(--hover_color);
+}
+
+.table_list_itens {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+.table_list_itens tr {
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+.table_list_itens tbody tr:nth-child(2n+1) {
+    background-color: #ebeaea;
+}
+
+.table_list_itens th {
+    font-size: 1.1em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.table_list_itens th, td {
+    padding: .625em;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.table_list_itens svg {
+    fill: #990b0b;
+}
+
+.table_list_itens svg:hover {
+    fill: var(--hover_color);
 }
 
 .system_options_wrapper {
@@ -99,6 +190,10 @@ body {
     color: #f75959;
 }
 
+.user_card_footer:hover, .product_card_footer:hover, .marcas_card_footer:hover, .sales_card_footer:hover{
+    color: var(--hover_color);
+}
+
 
 .user_card_footer p, .product_card_footer p, .marcas_card_footer p, .sales_card_footer p{
     margin: 0;
@@ -113,22 +208,6 @@ body {
     width: 100%;
     min-width: 300px;
     max-width: 1400px;
-}
-
-.user_wrapper{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-inline: 50px;
-    padding: 20px;
-}
-
-
-
-.user_wrapper h1 {
-    font-size: 32px;
-    font-weight: bolder;
-    margin-left: 10px;
 }
 
 .wrapper_user_filter{
@@ -195,55 +274,31 @@ body {
     padding: 5px 20px 5px 20px;
 }
 
-.filter_buttons .btn:hover{
-    background-color: #480f10;
-    border-color: #480f10;
-}
-
 .wrapper_user_list {
     width: 100%;
     margin-top: 30px;
     overflow-x: auto;
 }
 
-.user_list {
-    width: 100%;
-    border-collapse: collapse;
-    padding: 10px;
+.details_inputs {
+    column-gap: 20px;
+    row-gap: 10px;
+    flex-wrap: wrap;
 }
 
-.user_list tr{
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+.details_inputs div{
+    width: calc(100% / 3 - 20px);
 }
 
-.user_list tbody tr:nth-child(2n+1){
-    background-color: #ebeaea;
-}
-
-.user_list th{
-    font-size: 1.1em;
-    letter-spacing: .1em;
-    text-transform: uppercase;
+.details_inputs div label{
+    font-size: 18px;
     font-weight: 400;
 }
 
-.user_list th, td{
-    padding: .625em;
-    text-align: center;
-    white-space: nowrap;
+.details_inputs div input, select{
+    padding: 5px 10px 5px 20px;
+    border-radius: 5px;
 }
-
-.wrapper_edit_details{
-    width: 100%;
-    margin-inline: 10%;
-    display: flex;
-    flex-direction: column;
-}
-
-
-
-
 
 @media (max-width: 1420px) {
     .system_options_wrapper{
@@ -259,6 +314,12 @@ body {
     }
 }
 
+@media (max-width: 1200px){
+    .details_inputs div {
+        width: calc(100% / 2 - 20px);
+    }
+}
+
 @media (max-width: 1100px){
     .filter_inputs{
         flex-wrap: wrap;
@@ -267,6 +328,12 @@ body {
 
     .filter_inputs label{
         width: 47%;
+    }
+}
+
+@media(max-width: 900px){
+    .wrapper_default {
+        margin: 2rem;
     }
 }
 
@@ -290,5 +357,15 @@ body {
 
     .filter_inputs label{
         width: 100%;
+    }
+
+    .btn{
+        font-weight: 500;
+        font-size: 12px;
+        padding-block: 10px;
+    }
+
+    .details_inputs div {
+        width: calc(100%  - 20px);
     }
 }

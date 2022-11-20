@@ -10,35 +10,32 @@ using TodaHora.Models;
 using TodaHora.Models.Utils;
 using TodaHora.Models.ViewModel;
 using System.Configuration;
-using System.Web.UI;
-using System.Web.Helpers;
 
 namespace TodaHora.Controllers
 {
     public class LoginController : Controller
     {
+        private dbTodaHoraEntities dbContext = new dbTodaHoraEntities();
+
         // GET: Login
         public ActionResult Index()
         {
             Cookies cookie = new Cookies();
 
             //Valida existência do cookie preenchido, caso vázio solicita login, se não redireciona para o Index/Home
-            if(cookie.username == String.Empty)
+            if (cookie.username == String.Empty)
             {
                 return View();
             }
             else
             {
                 return RedirectToAction("Index", "Home");
-            }     
+            }
         }
 
         [HttpPost]
         public ActionResult Index(string username, string password)
         {
-
-            dbTodaHoraEntities dbContext = new dbTodaHoraEntities();
-
             try
             {
                 var UsuarioPost = new UserLoginView();
@@ -73,7 +70,7 @@ namespace TodaHora.Controllers
                     cookie.Values.Add("user_Id", UsuarioSystem.Usuario_Id.ToString());
                     cookie.Values.Add("username", UsuarioSystem.Username);
                     cookie.Values.Add("email", UsuarioSystem.Email);
-                    cookie.Values.Add("nome", $"{UsuarioSystem.Pessoa.Nome} {UsuarioSystem.Pessoa.Sobrenome}");
+                    cookie.Values.Add("nome", UsuarioSystem.Pessoa.Nome);
                     if (UsuarioSystem.blnAdmin == true)
                         cookie.Values.Add("IsAdmin", "S");
                     else

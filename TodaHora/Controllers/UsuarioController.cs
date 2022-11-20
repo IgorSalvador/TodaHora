@@ -35,6 +35,8 @@ namespace TodaHora.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.SexoList = dbTodaHora.Sexo.ToList();
+
             return View(usuario);
         }
 

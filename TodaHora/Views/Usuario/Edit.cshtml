@@ -1,19 +1,18 @@
 ﻿@model TodaHora.Models.Usuario
 @{
-    ViewBag.Title = "Detalhes";
+    ViewBag.Title = "Editar";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-
 }
 
 <div class="wrapper_default">
 
 
-    <h1>Detalhes de usuário</h1>
+    <h1>Edição de usuário</h1>
 
     <div class="actions_buttons">
-        @*<button class="btn">Editar</button>
-        <button class="btn">Desativar</button>*@
+        <button class="btn" disabled>Salvar</button>
+        <button class="btn">Editar</button>
+        <button class="btn">Desativar</button>
         <a href="@Url.Action("Index", "Usuario")" class="btn">Voltar à lista</a>
     </div>
 
@@ -47,7 +46,21 @@
 
             <div>
                 @Html.LabelFor(m => m.Pessoa.Sexo.Descricao, "Sexo", new { @class = "" })
-                @Html.TextBoxFor(m => m.Pessoa.Sexo.Descricao, new { @class = "", disabled = "true" })
+                <select id="Pessoa.Sexo" name="Pessoa.Sexo" disabled>
+                    @foreach (var sexo in ViewBag.SexoList)
+                    {
+
+                        if (sexo.Sexo_Id == Model.Pessoa.Sexo.Sexo_Id)
+                        {
+                            <option value="@sexo.Sexo_Id" selected>@sexo.Descricao</option>
+                        }
+                        else
+                        {
+                            <option value="@sexo.Sexo_Id">@sexo.Descricao</option>
+                        }
+                    }
+
+                </select>
             </div>
 
             <div>
@@ -95,4 +108,3 @@
         });
     </script>
 }
-
