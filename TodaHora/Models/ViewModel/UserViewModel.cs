@@ -39,10 +39,8 @@ namespace TodaHora.Models.ViewModel
 
                 usuario.Pessoa.Nome = UserUpdate.Nome;
                 usuario.Pessoa.Sobrenome = UserUpdate.Sobrenome;
-                usuario.Pessoa.DataNascimento = UserUpdate.DataNascimento;
-                usuario.Pessoa.Cpf = UserUpdate.Cpf;
+                usuario.Email = UserUpdate.Email;
                 usuario.Pessoa.Telefone = UserUpdate.Telefone;
-                usuario.Pessoa.Sexo_Id = UserUpdate.Sexo_Id;
                 usuario.blnAdmin = UserUpdate.blnAdmin;
 
                 db.Entry(usuario).State = EntityState.Modified;

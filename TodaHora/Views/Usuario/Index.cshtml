@@ -15,22 +15,22 @@
             <div class="filter_inputs">
                 <label>
                     <span>Nome:</span>
-                    <input type="text" name="txtNome" value="@ViewBag.txtNome" />
+                    <input type="text" name="txtNome" value="@ViewBag.txtNome" autocomplete="off"/>
                 </label>
 
                 <label>
                     <span>Username:</span>
-                    <input type="text" name="txtNomeUsuario" value="@ViewBag.txtNomeUsuario" />
+                    <input type="text" name="txtNomeUsuario" value="@ViewBag.txtNomeUsuario" autocomplete="off"/>
                 </label>
 
                 <label>
                     <span>E-mail:</span>
-                    <input type="email" name="txtEmail" value="@ViewBag.txtEmail" />
+                    <input type="email" name="txtEmail" value="@ViewBag.txtEmail" autocomplete="off"/>
                 </label>
 
                 <label>
                     <span>Telefone:</span>
-                    <input type="tel" name="txtTelefone" value="@ViewBag.txtTelefone" class="telefone" />
+                    <input type="tel" name="txtTelefone" value="@ViewBag.txtTelefone" class="telefone" autocomplete="off"/>
                 </label>
             </div>
 
@@ -135,7 +135,7 @@
             $(".telefone").mask("(00) 00000-0000");
 
             $("#btn_limpar").on("click", function () {
-                // Adicionar limpeza de filtro
+                window.location.href = '@Url.Action("Index", "Usuario")';
             });
 
         });

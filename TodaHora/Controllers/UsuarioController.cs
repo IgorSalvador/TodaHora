@@ -19,7 +19,16 @@ namespace TodaHora.Controllers
         // GET: Usuario
         public ActionResult Index()
         {
-            return View(dbTodaHora.Usuario.ToList().Take(100));
+            LoginCookiesAtual.getCookies();
+
+            if(LoginCookiesAtual.username == string.Empty)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                return View(dbTodaHora.Usuario.ToList().Take(100));
+            }
         }
 
         [HttpPost]
@@ -73,46 +82,74 @@ namespace TodaHora.Controllers
 
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            LoginCookiesAtual.getCookies();
+
+            if (LoginCookiesAtual.username == string.Empty)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Login");
             }
-
-            Usuario usuario = dbTodaHora.Usuario.Find(id);
-
-            if (usuario == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                Usuario usuario = dbTodaHora.Usuario.Find(id);
+
+                if (usuario == null)
+                {
+                    return HttpNotFound();
+                }
+
+                ViewBag.SexoList = dbTodaHora.Sexo.ToList();
+
+                return View(usuario);
             }
-
-            ViewBag.SexoList = dbTodaHora.Sexo.ToList();
-
-            return View(usuario);
         }
 
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            LoginCookiesAtual.getCookies();
+
+            if (LoginCookiesAtual.username == string.Empty)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Login");
             }
-
-            Usuario usuario = dbTodaHora.Usuario.Find(id);
-
-            if (usuario == null)
+            else
             {
-                return HttpNotFound();
-            }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
 
-            return View(usuario);
+                Usuario usuario = dbTodaHora.Usuario.Find(id);
+
+                if (usuario == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(usuario);
+            }
         }
 
         public ActionResult UserProfile(int user_Id)
         {
-            //Lista generos disponiveis para exibição na tela em caso de edição.
-            ViewBag.GeneroList = dbTodaHora.Sexo.Where(m => m.blnAtivo == true).ToList();
 
-            return View(dbTodaHora.Usuario.Where(m => m.Usuario_Id == user_Id).ToList());
+            LoginCookiesAtual.getCookies();
+
+            if (LoginCookiesAtual.username == string.Empty)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                //Lista generos disponiveis para exibição na tela em caso de edição.
+                ViewBag.GeneroList = dbTodaHora.Sexo.Where(m => m.blnAtivo == true).ToList();
+
+                return View(dbTodaHora.Usuario.Where(m => m.Usuario_Id == user_Id).ToList());
+            }
         }
 
         #region :: Ajax functions ::
@@ -120,7 +157,7 @@ namespace TodaHora.Controllers
         [HttpPost]
         [AllowAnonymous]
         [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
-        public JsonResult EditUserInfo(int Usuario_Id, string Nome, string Sobrenome, DateTime DataNascimento, string CPF, string Telefone, int Sexo_Id, string Username, string Email, int blnAdmin)
+        public JsonResult EditUserInfo(int Usuario_Id, string Nome, string Sobrenome, string Telefone,string Username, string Email, int blnAdmin)
         {
             UserViewModel Usuario = new UserViewModel();
 
@@ -129,32 +166,14 @@ namespace TodaHora.Controllers
                 Usuario.Usuario_Id = Usuario_Id;
                 Usuario.Nome = Nome;
                 Usuario.Sobrenome = Sobrenome;
-                Usuario.DataNascimento = DataNascimento;
-                Usuario.Cpf = CPF.Replace("-", "").Replace(".", "").Trim();
+                Usuario.Email = Email;
                 Usuario.Telefone = Telefone.Replace(")", "").Replace("(", "").Replace("-", "").Replace(" ", "").Trim();
-                Usuario.Sexo_Id = Sexo_Id; ;
                 Usuario.Username = Username;
                 Usuario.blnAdmin = blnAdmin == 1 ? true : false;
 
                 var ListagemUsuario = Usuario.EditUserInfo(Usuario);
 
-                if (ListagemUsuario.Count > 0)
-                {
-                    Cookies cookíe = new Cookies();
-
-                    if (cookíe.reloadCookies(Usuario_Id))
-                    {
-                        return Json(true, JsonRequestBehavior.AllowGet);
-                    }
-                    else
-                    {
-                        throw new Exception("Erro ao atualizar cookies, após atualização do perfil");
-                    }
-                }
-                else
-                {
-                    throw new Exception("Erro ao realizar a atualização do perfil");
-                }
+                return Json(true, JsonRequestBehavior.AllowGet);
 
             }
             catch(Exception ex)

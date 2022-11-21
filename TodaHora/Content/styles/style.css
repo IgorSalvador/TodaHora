@@ -20,11 +20,12 @@ h1 {
     font-weight: bolder;
 }
 
-.wrapper_default{
+.wrapper_default {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 2rem 8rem;
+    margin-block: 2rem;
+    padding-inline: 2rem;
 }
 
 .form_group {
@@ -331,9 +332,10 @@ h1 {
     }
 }
 
-@media(max-width: 900px){
+@media(max-width: 950px){
     .wrapper_default {
-        margin: 2rem;
+        margin-block: 2rem;
+        margin-inline: 1rem;
     }
 }
 
