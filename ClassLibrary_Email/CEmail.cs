@@ -57,7 +57,8 @@ namespace ClassLibrary_Email
                 _smtpClient.Host = strSMTP;
                 _smtpClient.Port = Convert.ToInt32(intPort);
                 _smtpClient.UseDefaultCredentials = false;
-                _smtpClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["MailSenderName"], ConfigurationManager.AppSettings["MailSenderPassword"]);
+                //_smtpClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["MailSenderName"], ConfigurationManager.AppSettings["MailSenderPassword"]);
+                _smtpClient.Credentials = new NetworkCredential("igorsalvador0621@outlook.com.br",""); // Create new e-mail for it
                 _smtpClient.EnableSsl = true;
                 _smtpClient.Send(_objMailMessage);
 

@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Web.UI.WebControls;
 using System.Net;
 using System.Text;
+using ClassLibrary_Email;
 
 namespace TodaHora.Models
 {
@@ -22,7 +23,9 @@ namespace TodaHora.Models
         private int intPorta;
         public string Assunto;
         public ClassLibrary_Email.Email newUsername { get; set; }
+        public string username;
         public ClassLibrary_Email.Email NewUserMail { get; set; }
+        public string email;
 
         public Mail()
         {
@@ -40,12 +43,16 @@ namespace TodaHora.Models
             {
                 ClassLibrary_Email.CEmail objM = new ClassLibrary_Email.CEmail();
                 List<ClassLibrary_Email.Email> mailTo = new List<ClassLibrary_Email.Email>();
-                mailTo.Add(mail.NewUserMail);
+
+                Email email = new Email();
+                email.strEmail = mail.email;
+
+                mailTo.Add(email);
                 StringBuilder sb = new StringBuilder();
 
                 #region Corpo do e-mail 
 
-                sb.AppendFormat("<span {0}> Olá, {1}! Tudo bem? Esperamos que sim.", strEstilo, mail.newUsername);
+                sb.AppendFormat("<span {0}> Olá, {1}! Tudo bem? Esperamos que sim. </span>", strEstilo, mail.username);
 
                 #endregion
 

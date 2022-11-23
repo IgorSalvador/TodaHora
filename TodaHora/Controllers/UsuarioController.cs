@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary_Email;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -89,14 +90,50 @@ namespace TodaHora.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Usuario usuario)
+        public ActionResult Create(Usuario usuario, int blnAdmin)
         {
+            LoginCookiesAtual.getCookies();
 
-            var teste = usuario.Pessoa.Nome;
-            var nome = Request.Form["Pessoa.Nome"];
-            var it = 0;
+            if (ModelState.IsValid)
+            {
+                usuario.blnAdmin = blnAdmin == 1 ? true : false;
+                usuario.Data_Inclusao = DateTime.Now;
+                usuario.Data_alteracao = DateTime.Now;
+                usuario.UsuarioAlteracao = LoginCookiesAtual.nome;
+                usuario.Username = "";
+                usuario.Senha = "";
+                usuario.blnAtivo = false;
 
-            return RedirectToAction("Index", "Usuario");
+
+
+                //Usuario user = new Usuario();
+                //user.Pessoa.Nome = usuario.Pessoa.Nome;
+                //user.Pessoa.Sobrenome = usuario.Pessoa.Sobrenome;
+                //user.Pessoa.DataNascimento = usuario.Pessoa.DataNascimento;
+                //user.Pessoa.Cpf = usuario.Pessoa.Cpf;
+                //user.Pessoa.Sexo_Id = usuario.Pessoa.Sexo_Id;
+                //user.blnAdmin = usuario.blnAdmin;
+                //user.Data_Inclusao = DateTime.Now;
+                //user.Data_alteracao = DateTime.Now;
+                //user.UsuarioAlteracao = LoginCookiesAtual.nome;
+
+
+                dbTodaHora.Usuario.Add(usuario);
+                dbTodaHora.SaveChanges();
+
+                Mail objM = new Mail();
+                objM.Assunto = "Novo usuário";
+                objM.email = usuario.Email;
+                objM.username = usuario.Pessoa.Nome;
+                objM.UserMailPasswordDefiner(objM);
+
+                return RedirectToAction("Index", "Usuario");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Usuario");
+            }
+            
         }
 
         public ActionResult Edit(int? id)
