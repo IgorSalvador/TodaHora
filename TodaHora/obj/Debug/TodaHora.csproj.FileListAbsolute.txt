@@ -268,3 +268,5 @@ C:\UserData\z004hbwp\Documents\GitHub\TodaHora\TodaHora\obj\Debug\TodaHora.cspro
 C:\UserData\z004hbwp\Documents\GitHub\TodaHora\TodaHora\obj\Debug\TodaHora.csproj.CopyComplete
 C:\UserData\z004hbwp\Documents\GitHub\TodaHora\TodaHora\obj\Debug\TodaHora.dll
 C:\UserData\z004hbwp\Documents\GitHub\TodaHora\TodaHora\obj\Debug\TodaHora.pdb
+C:\Users\igors\Documents\GitHub\TodaHora\TodaHora\bin\ClassLibrary_Email.dll
+C:\Users\igors\Documents\GitHub\TodaHora\TodaHora\bin\ClassLibrary_Email.pdb

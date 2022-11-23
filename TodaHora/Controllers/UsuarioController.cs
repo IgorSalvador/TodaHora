@@ -12,7 +12,7 @@ using TodaHora.Models.ViewModel;
 
 namespace TodaHora.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : BaseController
     {
         dbTodaHoraEntities dbTodaHora = new dbTodaHoraEntities();
 
@@ -78,6 +78,25 @@ namespace TodaHora.Controllers
             }
 
             return View(listUsers.OrderByDescending(item => item.Usuario_Id));
+        }
+
+        public ActionResult Create()
+        {
+            //Lista generos disponiveis para exibição na tela em caso de edição.
+            ViewBag.SexoList = dbTodaHora.Sexo.Where(m => m.blnAtivo == true).ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Usuario usuario)
+        {
+
+            var teste = usuario.Pessoa.Nome;
+            var nome = Request.Form["Pessoa.Nome"];
+            var it = 0;
+
+            return RedirectToAction("Index", "Usuario");
         }
 
         public ActionResult Edit(int? id)

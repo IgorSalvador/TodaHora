@@ -1,0 +1,6 @@
+C:\Users\igors\Documents\GitHub\TodaHora\ClassLibrary_Email\bin\Debug\ClassLibrary_Email.dll
+C:\Users\igors\Documents\GitHub\TodaHora\ClassLibrary_Email\bin\Debug\ClassLibrary_Email.pdb
+C:\Users\igors\Documents\GitHub\TodaHora\ClassLibrary_Email\obj\Debug\ClassLibrary_Email.csproj.AssemblyReference.cache
+C:\Users\igors\Documents\GitHub\TodaHora\ClassLibrary_Email\obj\Debug\ClassLibrary_Email.csproj.CoreCompileInputs.cache
+C:\Users\igors\Documents\GitHub\TodaHora\ClassLibrary_Email\obj\Debug\ClassLibrary_Email.dll
+C:\Users\igors\Documents\GitHub\TodaHora\ClassLibrary_Email\obj\Debug\ClassLibrary_Email.pdb

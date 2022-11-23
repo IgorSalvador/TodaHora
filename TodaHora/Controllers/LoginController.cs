@@ -13,7 +13,7 @@ using System.Configuration;
 
 namespace TodaHora.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         private dbTodaHoraEntities dbContext = new dbTodaHoraEntities();
 
@@ -22,15 +22,51 @@ namespace TodaHora.Controllers
         {
             Cookies cookie = new Cookies();
 
-            //Valida existência do cookie preenchido, caso vázio solicita login, se não redireciona para o Index/Home
+            //Valida existência do cookie preenchido, caso vázio solicita login, se não redireciona para o Index / Home
             if (cookie.username == String.Empty)
             {
                 return View();
             }
             else
             {
+
+                #region ::Caso o acesso tenha sido por algum link, após o login será redirecionado::
+
+                try
+                {
+                    HttpCookie cookieRedirect = Request.Cookies["Usuario"];
+                    if (cookieRedirect != null)
+                    {
+                        // Separa os valores das propriedade
+                        string[] valores = cookieRedirect.Value.ToString().Split('&');
+
+                        string controller = valores[0] as string;
+                        string action = valores[1] as string;
+                        string id = "";
+                        try
+                        {// o ID pode ser vazio
+                            id = valores[2] as string;
+                            id = id.Split('=')[1];
+                        }
+                        catch { id = ""; }
+
+                        controller = controller.Split('=')[1];
+                        action = action.Split('=')[1];
+
+                        //Apago o Cookie
+                        Response.Cookies["Usuario"].Expires = DateTime.Now.AddDays(-1);
+
+                        return string.IsNullOrEmpty(id) ? RedirectToRoute(new { controller, action }) :
+                            RedirectToRoute(new { controller, action, id });
+                    }
+                }
+                catch { }
+
+                #endregion
+
                 return RedirectToAction("Index", "Home");
             }
+
         }
 
         [HttpPost]
@@ -76,7 +112,7 @@ namespace TodaHora.Controllers
                     else
                         cookie.Values.Add("isAdmin", "N");
                     cookie.Values.Add("isLoggedIn", "S");
-                    cookie.Expires = DateTime.Now.AddHours(1);
+                    cookie.Expires = DateTime.Now.AddHours(5);
 
                     //Definindo segurança do cookie
                     cookie.HttpOnly = true;
@@ -85,7 +121,7 @@ namespace TodaHora.Controllers
                     objGlobal.setCookieToResponse(cookie);
                 }
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Login");
 
             }
             catch (Exception ex)

@@ -7,7 +7,7 @@ using TodaHora.Models;
 
 namespace TodaHora.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private dbTodaHoraEntities db = new dbTodaHoraEntities();
 

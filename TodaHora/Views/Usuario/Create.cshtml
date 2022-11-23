@@ -1,0 +1,81 @@
+﻿@model TodaHora.Models.Usuario
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper_default">
+
+    <h1>Novo usuário</h1>
+
+    <form action="@Url.Action("Create", "Usuario")" method="post" class="create_user_form">
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.Nome, "Nome")
+            @Html.EditorFor(m => m.Pessoa.Nome, new { htmlAtttibutes = new { @class = "", @name = "Nome" } })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.Sobrenome, "Sobrenome")
+            @Html.EditorFor(m => m.Pessoa.Sobrenome, new { htmlAtttibutes = new { @class = "", name = "Sobrenome" } })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.DataNascimento, "Data de Nascimento")
+            @Html.EditorFor(m => m.Pessoa.DataNascimento, new { htmlAtttibutes = new { @class = "", type = "date" } })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.Cpf, "CPF")
+            @Html.EditorFor(m => m.Pessoa.Cpf, new { htmlAtttibutes = new { @class = "Cpf" } })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.Telefone, "Telefone")
+            @Html.EditorFor(m => m.Pessoa.Telefone, new { htmlAtttibutes = new { @class = "Telefone" } })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Pessoa.Sexo, "Sexo")
+
+            <select id="Pessoa.Sexo" name="Pessoa.Sexo" class="form-control Sexo">
+                @foreach (var sexo in ViewBag.SexoList)
+                {
+                    <option value="@sexo.Sexo_Id">@sexo.Descricao</option>
+                }
+
+            </select>
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Email, "Email")
+            @Html.EditorFor(m => m.Email, new { htmlAtttibutes = new { @class = "" } })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.blnAdmin, "Perfil")
+            <select id="Perfil" name="Perfil" class="form-control">
+                <option value="0">Usuário</option>
+                <option value="1">Administrador</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary">Salvar</button>
+
+
+    </form>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.mask.js"></script>
+    <script src="~/Scripts/jquery.mask.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $(".Telefone").mask("(00) 00000-0000");
+            $(".Cpf").mask("000.000.000-00");
+        });
+    </script>
+}
+
