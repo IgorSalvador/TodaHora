@@ -17,13 +17,15 @@ namespace TodaHora.Models
         public int Usuario_Id { get; set; }
         public string Username { get; set; }
         public string Senha { get; set; }
-        public Nullable<System.DateTime> Data_Inclusao { get; set; }
         public bool blnAtivo { get; set; }
         public bool blnAdmin { get; set; }
         public Nullable<System.DateTime> Data_alteracao { get; set; }
         public string UsuarioAlteracao { get; set; }
         public Nullable<int> Pessoa_Id { get; set; }
         public string Email { get; set; }
+        public Nullable<System.DateTime> Created_On { get; set; }
+        public string Created_By_UserName { get; set; }
+        public Nullable<int> Created_By_Id { get; set; }
     
         public virtual Pessoa Pessoa { get; set; }
     }

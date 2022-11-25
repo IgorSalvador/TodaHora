@@ -18,10 +18,14 @@ namespace TodaHora.Models
         private string strEstiloNegrito;
         private string strEstiloTitulo;
 
+        // Mensager configurations
         private string strFrom;
         private string strSMTP;
         private int intPorta;
+
+        //Mail Infos
         public string Assunto;
+        public string ObjectId;
         public ClassLibrary_Email.Email newUsername { get; set; }
         public string username;
         public ClassLibrary_Email.Email NewUserMail { get; set; }
@@ -53,6 +57,12 @@ namespace TodaHora.Models
                 #region Corpo do e-mail 
 
                 sb.AppendFormat("<span {0}> Olá, {1}! Tudo bem? Esperamos que sim. </span>", strEstilo, mail.username);
+                sb.AppendFormat("<br><br>");
+                sb.AppendFormat("<span {0}> Foi realizada a criação de um novo usuário para você no sistema do supermercado TodaHora. </span>", strEstilo);
+                sb.AppendFormat("<br><br>");
+                sb.AppendFormat("<span {0}> Para definir seu usuário e senha de acesso ao sistema clique <a href='{1}/Usuario/SetCredentials/{2}'>aqui</a> para realizar seu primeiro acesso.</span>", strEstilo, ConfigurationManager.AppSettings["BaseUrl"], mail.ObjectId);
+                sb.AppendFormat("<br><br>");
+                sb.AppendFormat("<span {0}>Equipe de IT TodaHora Supermercados. </span>", strEstilo);
 
                 #endregion
 

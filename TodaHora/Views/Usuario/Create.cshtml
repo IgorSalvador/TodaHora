@@ -8,59 +8,70 @@
 
     <h1>Novo usuário</h1>
 
+    <div class="actions_buttons">
+        <!-- Vazio para futuras ações -->
+    </div>
+
+
     <form action="@Url.Action("Create", "Usuario")" method="post" class="create_user_form">
 
-        <div>
-            @Html.LabelFor(m => m.Pessoa.Nome, "Nome")
-            @Html.EditorFor(m => m.Pessoa.Nome, new { htmlAtttibutes = new { @class = "" } })
+        <div class="form_group_create">
+            <div>
+                @Html.LabelFor(m => m.Pessoa.Nome, "Nome")
+                @Html.TextBoxFor(m => m.Pessoa.Nome, new { @class = "form-control", @autocomplete="off" })
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Pessoa.Sobrenome, "Sobrenome")
+                @Html.TextBoxFor(m => m.Pessoa.Sobrenome, new { @class = "form-control", @autocomplete = "off" })
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Pessoa.DataNascimento, "Data de Nascimento")
+                <input type="date" class="form-control DataNascimento" id="Pessoa.DataNascimento" name="Pessoa.DataNascimento" autocomplete="off"/>
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Pessoa.Cpf, "CPF")
+                @Html.TextBoxFor(m => m.Pessoa.Cpf, new { @class = "form-control Cpf", @autocomplete = "off" })
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Pessoa.Telefone, "Telefone")
+                @Html.TextBoxFor(m => m.Pessoa.Telefone, new { @class = "form-control Telefone", @autocomplete = "off" })
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Email, "Email")
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @autocomplete = "off" })
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Pessoa.Sexo, "Sexo")
+
+                <select id="Pessoa.Sexo" name="Pessoa.Sexo_Id" class="form-control Sexo">
+                    @foreach (var sexo in ViewBag.SexoList)
+                    {
+                        <option value="@sexo.Sexo_Id">@sexo.Descricao</option>
+                    }
+
+                </select>
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.blnAdmin, "Perfil")
+                <select id="Perfil" name="blnAdmin" class="form-control">
+                    <option value="0">Usuário</option>
+                    <option value="1">Administrador</option>
+                </select>
+            </div>
         </div>
 
-        <div>
-            @Html.LabelFor(m => m.Pessoa.Sobrenome, "Sobrenome")
-            @Html.EditorFor(m => m.Pessoa.Sobrenome, new { htmlAtttibutes = new { @class = "" } })
+        <div class="btn_form_actions">
+            <button class="btn btn-primary">Salvar</button>
+            <a href="@Url.Action("Index", "Usuario")" class="btn">Voltar à lista</a>
         </div>
 
-        <div>
-            @Html.LabelFor(m => m.Pessoa.DataNascimento, "Data de Nascimento")
-            <input type="date" class="form-control DataNascimento" id="Pessoa.DataNascimento" name="Pessoa.DataNascimento"/>
-        </div>
-
-        <div>
-            @Html.LabelFor(m => m.Pessoa.Cpf, "CPF")
-            @Html.EditorFor(m => m.Pessoa.Cpf, new { @class = "Cpf" })
-        </div>
-
-        <div>
-            @Html.LabelFor(m => m.Pessoa.Telefone, "Telefone")
-            @Html.EditorFor(m => m.Pessoa.Telefone, new { htmlAtttibutes = new { @class = "Telefone" } })
-        </div>
-
-        <div>
-            @Html.LabelFor(m => m.Pessoa.Sexo, "Sexo")
-
-            <select id="Pessoa.Sexo" name="Pessoa.Sexo_Id" class="form-control Sexo">
-                @foreach (var sexo in ViewBag.SexoList)
-                {
-                    <option value="@sexo.Sexo_Id">@sexo.Descricao</option>
-                }
-
-            </select>
-        </div>
-
-        <div>
-            @Html.LabelFor(m => m.Email, "Email")
-            @Html.EditorFor(m => m.Email, new { htmlAtttibutes = new { @class = "" } })
-        </div>
-
-        <div>
-            @Html.LabelFor(m => m.blnAdmin, "Perfil")
-            <select id="Perfil" name="blnAdmin" class="form-control">
-                <option value="0">Usuário</option>
-                <option value="1">Administrador</option>
-            </select>
-        </div>
-
-        <button class="btn btn-primary">Salvar</button>
 
 
     </form>

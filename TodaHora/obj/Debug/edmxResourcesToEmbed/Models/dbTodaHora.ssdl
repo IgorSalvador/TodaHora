@@ -7,7 +7,7 @@
     <Property Name="Pessoa_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nome" Type="varchar" MaxLength="100" />
     <Property Name="Sobrenome" Type="varchar" MaxLength="100" />
-    <Property Name="DataNascimento" Type="datetime" />
+    <Property Name="DataNascimento" Type="date" />
     <Property Name="Cpf" Type="varchar" MaxLength="11" />
     <Property Name="Sexo_Id" Type="int" />
     <Property Name="Telefone" Type="varchar" MaxLength="11" />
@@ -25,15 +25,17 @@
       <PropertyRef Name="Usuario_Id" />
     </Key>
     <Property Name="Usuario_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Senha" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="Data_Inclusao" Type="datetime" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+    <Property Name="Senha" Type="varchar" MaxLength="200" />
     <Property Name="blnAtivo" Type="bit" Nullable="false" />
     <Property Name="blnAdmin" Type="bit" Nullable="false" />
     <Property Name="Data_alteracao" Type="datetime" />
     <Property Name="UsuarioAlteracao" Type="varchar" MaxLength="100" />
     <Property Name="Pessoa_Id" Type="int" />
     <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Created_On" Type="datetime" />
+    <Property Name="Created_By_UserName" Type="varchar" MaxLength="100" />
+    <Property Name="Created_By_Id" Type="int" />
   </EntityType>
   <Association Name="FK__Pessoa__Sexo_Id__36B12243">
     <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />

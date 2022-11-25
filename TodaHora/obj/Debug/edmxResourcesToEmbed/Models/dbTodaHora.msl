@@ -26,10 +26,12 @@
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="dbTodaHoraModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Created_By_Id" ColumnName="Created_By_Id" />
+          <ScalarProperty Name="Created_By_UserName" ColumnName="Created_By_UserName" />
+          <ScalarProperty Name="Created_On" ColumnName="Created_On" />
           <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Senha" ColumnName="Senha" />
-          <ScalarProperty Name="Data_Inclusao" ColumnName="Data_Inclusao" />
           <ScalarProperty Name="blnAtivo" ColumnName="blnAtivo" />
           <ScalarProperty Name="blnAdmin" ColumnName="blnAdmin" />
           <ScalarProperty Name="Data_alteracao" ColumnName="Data_alteracao" />

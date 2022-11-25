@@ -7,7 +7,7 @@
     <Property Name="Pessoa_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Sobrenome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="DataNascimento" Type="DateTime" Precision="3" />
+    <Property Name="DataNascimento" Type="DateTime" Precision="0" />
     <Property Name="Cpf" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
     <Property Name="Sexo_Id" Type="Int32" />
     <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
@@ -28,9 +28,8 @@
       <PropertyRef Name="Usuario_Id" />
     </Key>
     <Property Name="Usuario_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Senha" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Data_Inclusao" Type="DateTime" Precision="3" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="true" />
+    <Property Name="Senha" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="true" />
     <Property Name="blnAtivo" Type="Boolean" Nullable="false" />
     <Property Name="blnAdmin" Type="Boolean" Nullable="false" />
     <Property Name="Data_alteracao" Type="DateTime" Precision="3" />
@@ -38,6 +37,9 @@
     <Property Name="Pessoa_Id" Type="Int32" />
     <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Pessoa" Relationship="Self.FK__Usuario__Pessoa___3C69FB99" FromRole="Usuario" ToRole="Pessoa" />
+    <Property Name="Created_On" Type="DateTime" Precision="3" />
+    <Property Name="Created_By_UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Created_By_Id" Type="Int32" />
   </EntityType>
   <Association Name="FK__Pessoa__Sexo_Id__3B75D760">
     <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />

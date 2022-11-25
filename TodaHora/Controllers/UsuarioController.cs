@@ -33,23 +33,23 @@ namespace TodaHora.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string txtNome, string txtNomeUsuario, string txtEmail, string txtTelefone)
+        public ActionResult Index(string txtNome, string txtEmail, string txtTelefone, string txtCPF)
         {
             bool blnNome = !string.IsNullOrWhiteSpace(txtNome);
-            bool blnNomeUsuario = !string.IsNullOrWhiteSpace(txtNomeUsuario);
             bool blnEmail = !string.IsNullOrWhiteSpace(txtEmail);
             bool blnTelefone = !string.IsNullOrWhiteSpace(txtTelefone);
+            bool blnCPF = !string.IsNullOrWhiteSpace(txtCPF); ;
 
             #region :: Removing Formatations ::
 
-            var nome = txtNome;
-            var username = txtNomeUsuario.Trim();
-            var email = txtEmail.Trim();
-            var telefone = txtTelefone.Replace(")", "").Replace("(", "").Replace("-", "").Replace(" ", "").Trim();
+            string nome = txtNome;
+            string email = txtEmail.Trim();
+            string telefone = FormatTelefone.SemFormatacao(txtTelefone);
+            string cpf = FormatCPFCNPJ.SemFormatacao(txtCPF);
 
             #endregion
 
-            if (!blnNome && !blnNomeUsuario && !blnEmail && !blnTelefone)
+            if (!blnNome && !blnEmail && !blnTelefone && !blnCPF)
                 return RedirectToAction("Index");
 
             List<Usuario> listUsers = dbTodaHora.Usuario.ToList();
@@ -60,10 +60,10 @@ namespace TodaHora.Controllers
                 listUsers = listUsers.Where(item => item.Pessoa.Nome.ToUpper().Contains(nome.ToUpper())).ToList();
             }
 
-            if (blnNomeUsuario)
+            if (blnCPF)
             {
-                ViewBag.txtNomeUsuario = username;
-                listUsers = listUsers.Where(item => item.Username.ToUpper().Contains(username.ToUpper())).ToList();
+                ViewBag.txtDataNascimento = txtCPF;
+                listUsers = listUsers.Where(item => item.Pessoa.Cpf.ToUpper().Contains(cpf.ToUpper())).ToList();
             }
 
             if (blnEmail)
@@ -94,44 +94,30 @@ namespace TodaHora.Controllers
         {
             LoginCookiesAtual.getCookies();
 
-            if (ModelState.IsValid)
+            if (usuario != null)
             {
                 usuario.blnAdmin = blnAdmin == 1 ? true : false;
-                usuario.Data_Inclusao = DateTime.Now;
-                usuario.Data_alteracao = DateTime.Now;
-                usuario.UsuarioAlteracao = LoginCookiesAtual.nome;
-                usuario.Username = "";
-                usuario.Senha = "";
                 usuario.blnAtivo = false;
-
-
-
-                //Usuario user = new Usuario();
-                //user.Pessoa.Nome = usuario.Pessoa.Nome;
-                //user.Pessoa.Sobrenome = usuario.Pessoa.Sobrenome;
-                //user.Pessoa.DataNascimento = usuario.Pessoa.DataNascimento;
-                //user.Pessoa.Cpf = usuario.Pessoa.Cpf;
-                //user.Pessoa.Sexo_Id = usuario.Pessoa.Sexo_Id;
-                //user.blnAdmin = usuario.blnAdmin;
-                //user.Data_Inclusao = DateTime.Now;
-                //user.Data_alteracao = DateTime.Now;
-                //user.UsuarioAlteracao = LoginCookiesAtual.nome;
+                usuario.Created_On = DateTime.Now;
+                usuario.Created_By_UserName = LoginCookiesAtual.username;
+                usuario.Created_By_Id = LoginCookiesAtual.user_Id;
 
 
                 dbTodaHora.Usuario.Add(usuario);
                 dbTodaHora.SaveChanges();
 
                 Mail objM = new Mail();
-                objM.Assunto = "Novo usuário";
+                objM.Assunto = "Criação de usuário - TodaHora Supermercado";
                 objM.email = usuario.Email;
                 objM.username = usuario.Pessoa.Nome;
+                objM.ObjectId = usuario.Usuario_Id.ToString();
                 objM.UserMailPasswordDefiner(objM);
 
                 return RedirectToAction("Index", "Usuario");
             }
             else
             {
-                return RedirectToAction("Index", "Usuario");
+                return RedirectToAction("Index", "Usuario"); // Redirecionar para erro
             }
             
         }

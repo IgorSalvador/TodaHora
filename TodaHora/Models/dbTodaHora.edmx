@@ -12,7 +12,7 @@
           <Property Name="Pessoa_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nome" Type="varchar" MaxLength="100" />
           <Property Name="Sobrenome" Type="varchar" MaxLength="100" />
-          <Property Name="DataNascimento" Type="datetime" />
+          <Property Name="DataNascimento" Type="date" />
           <Property Name="Cpf" Type="varchar" MaxLength="11" />
           <Property Name="Sexo_Id" Type="int" />
           <Property Name="Telefone" Type="varchar" MaxLength="11" />
@@ -30,15 +30,17 @@
             <PropertyRef Name="Usuario_Id" />
           </Key>
           <Property Name="Usuario_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Senha" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Data_Inclusao" Type="datetime" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Senha" Type="varchar" MaxLength="200" />
           <Property Name="blnAtivo" Type="bit" Nullable="false" />
           <Property Name="blnAdmin" Type="bit" Nullable="false" />
           <Property Name="Data_alteracao" Type="datetime" />
           <Property Name="UsuarioAlteracao" Type="varchar" MaxLength="100" />
           <Property Name="Pessoa_Id" Type="int" />
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Created_On" Type="datetime" />
+          <Property Name="Created_By_UserName" Type="varchar" MaxLength="100" />
+          <Property Name="Created_By_Id" Type="int" />
         </EntityType>
         <Association Name="FK__Pessoa__Sexo_Id__36B12243">
           <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />
@@ -88,7 +90,7 @@
           <Property Name="Pessoa_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Sobrenome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DataNascimento" Type="DateTime" Precision="3" />
+          <Property Name="DataNascimento" Type="DateTime" Precision="0" />
           <Property Name="Cpf" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="Sexo_Id" Type="Int32" />
           <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
@@ -109,9 +111,8 @@
             <PropertyRef Name="Usuario_Id" />
           </Key>
           <Property Name="Usuario_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Senha" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Data_Inclusao" Type="DateTime" Precision="3" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="Senha" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="true" />
           <Property Name="blnAtivo" Type="Boolean" Nullable="false" />
           <Property Name="blnAdmin" Type="Boolean" Nullable="false" />
           <Property Name="Data_alteracao" Type="DateTime" Precision="3" />
@@ -119,6 +120,9 @@
           <Property Name="Pessoa_Id" Type="Int32" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Pessoa" Relationship="Self.FK__Usuario__Pessoa___3C69FB99" FromRole="Usuario" ToRole="Pessoa" />
+          <Property Name="Created_On" Type="DateTime" Precision="3" />
+          <Property Name="Created_By_UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Created_By_Id" Type="Int32" />
         </EntityType>
         <Association Name="FK__Pessoa__Sexo_Id__3B75D760">
           <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />
@@ -188,10 +192,12 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="dbTodaHoraModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Created_By_Id" ColumnName="Created_By_Id" />
+                <ScalarProperty Name="Created_By_UserName" ColumnName="Created_By_UserName" />
+                <ScalarProperty Name="Created_On" ColumnName="Created_On" />
                 <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Senha" ColumnName="Senha" />
-                <ScalarProperty Name="Data_Inclusao" ColumnName="Data_Inclusao" />
                 <ScalarProperty Name="blnAtivo" ColumnName="blnAtivo" />
                 <ScalarProperty Name="blnAdmin" ColumnName="blnAdmin" />
                 <ScalarProperty Name="Data_alteracao" ColumnName="Data_alteracao" />

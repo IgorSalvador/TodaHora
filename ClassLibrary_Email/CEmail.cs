@@ -46,7 +46,7 @@ namespace ClassLibrary_Email
                         _objMailMessage.Bcc.Add(MailOCC[i].strEmail);
                     }
                 }
-                _objMailMessage.From = new MailAddress(strFrom);
+                _objMailMessage.From = new MailAddress(strFrom, "TodaHora Supermercados");
                 _objMailMessage.Subject = strSubject;
                 _objMailMessage.IsBodyHtml = true;
                 _objMailMessage.Body = strMessage;
@@ -57,8 +57,7 @@ namespace ClassLibrary_Email
                 _smtpClient.Host = strSMTP;
                 _smtpClient.Port = Convert.ToInt32(intPort);
                 _smtpClient.UseDefaultCredentials = false;
-                //_smtpClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["MailSenderName"], ConfigurationManager.AppSettings["MailSenderPassword"]);
-                _smtpClient.Credentials = new NetworkCredential("igorsalvador0621@outlook.com.br",""); // Create new e-mail for it
+                _smtpClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["MailSenderName"], ConfigurationManager.AppSettings["MailSenderPassword"]); // Create new e-mail for it
                 _smtpClient.EnableSsl = true;
                 _smtpClient.Send(_objMailMessage);
 
