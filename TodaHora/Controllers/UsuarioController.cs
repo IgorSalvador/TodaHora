@@ -96,6 +96,8 @@ namespace TodaHora.Controllers
 
             if (usuario != null)
             {
+                usuario.Pessoa.Cpf = FormatCPFCNPJ.SemFormatacao(usuario.Pessoa.Cpf);
+                usuario.Pessoa.Telefone = FormatTelefone.SemFormatacao(usuario.Pessoa.Telefone);
                 usuario.blnAdmin = blnAdmin == 1 ? true : false;
                 usuario.blnAtivo = false;
                 usuario.Created_On = DateTime.Now;
@@ -120,6 +122,29 @@ namespace TodaHora.Controllers
                 return RedirectToAction("Index", "Usuario"); // Redirecionar para erro
             }
             
+        }
+
+        public ActionResult SetCredentials(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Usuario usuario = dbTodaHora.Usuario.Find(id);
+
+            if (usuario == null)
+            {
+                return HttpNotFound();
+            }
+
+            if(usuario.Username == null && usuario.Username == "")
+            {
+                return RedirectToAction("", "Erro"); //Criar controlador de erro e action para usuário que já fez o primeiro acesso e definiu os dados
+            }
+
+            return View(usuario);
         }
 
         public ActionResult Edit(int? id)

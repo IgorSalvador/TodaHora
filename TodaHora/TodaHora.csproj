@@ -190,6 +190,7 @@
     <Content Include="Content\images\background_login.png" />
     <Content Include="Content\images\cart.png" />
     <Content Include="Content\images\client_logo.svg" />
+    <Content Include="Content\styles\CredentialsScreen.css" />
     <Content Include="Content\styles\LayoutStyle.css" />
     <Content Include="Content\styles\LoginSheet.css" />
     <Content Include="Content\styles\style.css" />
@@ -272,6 +273,7 @@
     <Content Include="Views\Usuario\Details.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Usuario\SetCredentials.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
