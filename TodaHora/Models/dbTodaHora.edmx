@@ -12,7 +12,7 @@
           <Property Name="Pessoa_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nome" Type="varchar" MaxLength="100" />
           <Property Name="Sobrenome" Type="varchar" MaxLength="100" />
-          <Property Name="DataNascimento" Type="date" />
+          <Property Name="DataNascimento" Type="datetime" />
           <Property Name="Cpf" Type="varchar" MaxLength="11" />
           <Property Name="Sexo_Id" Type="int" />
           <Property Name="Telefone" Type="varchar" MaxLength="11" />
@@ -32,17 +32,16 @@
           <Property Name="Usuario_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="100" />
           <Property Name="Senha" Type="varchar" MaxLength="200" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="blnAtivo" Type="bit" Nullable="false" />
           <Property Name="blnAdmin" Type="bit" Nullable="false" />
-          <Property Name="Data_alteracao" Type="datetime" />
-          <Property Name="UsuarioAlteracao" Type="varchar" MaxLength="100" />
+          <Property Name="DataAlteracao" Type="datetime" />
           <Property Name="Pessoa_Id" Type="int" />
-          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Created_On" Type="datetime" />
           <Property Name="Created_By_UserName" Type="varchar" MaxLength="100" />
           <Property Name="Created_By_Id" Type="int" />
         </EntityType>
-        <Association Name="FK__Pessoa__Sexo_Id__286302EC">
+        <Association Name="fk_Pessoa_Sexo">
           <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />
           <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="*" />
           <ReferentialConstraint>
@@ -54,7 +53,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuario__Pessoa___29572725">
+        <Association Name="fk_Usuario_Pessoa">
           <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -70,11 +69,11 @@
           <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Pessoa__Sexo_Id__286302EC" Association="Self.FK__Pessoa__Sexo_Id__286302EC">
+          <AssociationSet Name="fk_Pessoa_Sexo" Association="Self.fk_Pessoa_Sexo">
             <End Role="Sexo" EntitySet="Sexo" />
             <End Role="Pessoa" EntitySet="Pessoa" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuario__Pessoa___29572725" Association="Self.FK__Usuario__Pessoa___29572725">
+          <AssociationSet Name="fk_Usuario_Pessoa" Association="Self.fk_Usuario_Pessoa">
             <End Role="Pessoa" EntitySet="Pessoa" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
@@ -83,19 +82,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbTodaHoraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="dbTodaHoraEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Pessoa" EntityType="dbTodaHoraModel.Pessoa" />
-          <EntitySet Name="Sexo" EntityType="dbTodaHoraModel.Sexo" />
-          <EntitySet Name="Usuario" EntityType="dbTodaHoraModel.Usuario" />
-          <AssociationSet Name="FK__Pessoa__Sexo_Id__286302EC" Association="dbTodaHoraModel.FK__Pessoa__Sexo_Id__286302EC">
-            <End Role="Sexo" EntitySet="Sexo" />
-            <End Role="Pessoa" EntitySet="Pessoa" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Usuario__Pessoa___29572725" Association="dbTodaHoraModel.FK__Usuario__Pessoa___29572725">
-            <End Role="Pessoa" EntitySet="Pessoa" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Pessoa">
           <Key>
             <PropertyRef Name="Pessoa_Id" />
@@ -103,12 +89,12 @@
           <Property Name="Pessoa_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Sobrenome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DataNascimento" Type="DateTime" Precision="0" />
+          <Property Name="DataNascimento" Type="DateTime" Precision="3" />
           <Property Name="Cpf" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="Sexo_Id" Type="Int32" />
           <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Sexo" Relationship="dbTodaHoraModel.FK__Pessoa__Sexo_Id__286302EC" FromRole="Pessoa" ToRole="Sexo" />
-          <NavigationProperty Name="Usuario" Relationship="dbTodaHoraModel.FK__Usuario__Pessoa___29572725" FromRole="Pessoa" ToRole="Usuario" />
+          <NavigationProperty Name="Sexo" Relationship="Self.fk_Pessoa_Sexo" FromRole="Pessoa" ToRole="Sexo" />
+          <NavigationProperty Name="Usuario" Relationship="Self.fk_Usuario_Pessoa" FromRole="Pessoa" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Sexo">
           <Key>
@@ -117,7 +103,7 @@
           <Property Name="Sexo_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="blnAtivo" Type="Boolean" />
-          <NavigationProperty Name="Pessoa" Relationship="dbTodaHoraModel.FK__Pessoa__Sexo_Id__286302EC" FromRole="Sexo" ToRole="Pessoa" />
+          <NavigationProperty Name="Pessoa" Relationship="Self.fk_Pessoa_Sexo" FromRole="Sexo" ToRole="Pessoa" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -126,20 +112,19 @@
           <Property Name="Usuario_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Senha" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="blnAtivo" Type="Boolean" Nullable="false" />
           <Property Name="blnAdmin" Type="Boolean" Nullable="false" />
-          <Property Name="Data_alteracao" Type="DateTime" Precision="3" />
-          <Property Name="UsuarioAlteracao" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
           <Property Name="Pessoa_Id" Type="Int32" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Created_On" Type="DateTime" Precision="3" />
           <Property Name="Created_By_UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Created_By_Id" Type="Int32" />
-          <NavigationProperty Name="Pessoa" Relationship="dbTodaHoraModel.FK__Usuario__Pessoa___29572725" FromRole="Usuario" ToRole="Pessoa" />
+          <NavigationProperty Name="Pessoa" Relationship="Self.fk_Usuario_Pessoa" FromRole="Usuario" ToRole="Pessoa" />
         </EntityType>
-        <Association Name="FK__Pessoa__Sexo_Id__286302EC">
-          <End Type="dbTodaHoraModel.Sexo" Role="Sexo" Multiplicity="0..1" />
-          <End Type="dbTodaHoraModel.Pessoa" Role="Pessoa" Multiplicity="*" />
+        <Association Name="fk_Pessoa_Sexo">
+          <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sexo">
               <PropertyRef Name="Sexo_Id" />
@@ -149,9 +134,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuario__Pessoa___29572725">
-          <End Type="dbTodaHoraModel.Pessoa" Role="Pessoa" Multiplicity="0..1" />
-          <End Type="dbTodaHoraModel.Usuario" Role="Usuario" Multiplicity="*" />
+        <Association Name="fk_Usuario_Pessoa">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pessoa">
               <PropertyRef Name="Pessoa_Id" />
@@ -161,6 +146,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="dbTodaHoraEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pessoa" EntityType="Self.Pessoa" />
+          <EntitySet Name="Sexo" EntityType="Self.Sexo" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="fk_Pessoa_Sexo" Association="Self.fk_Pessoa_Sexo">
+            <End Role="Sexo" EntitySet="Sexo" />
+            <End Role="Pessoa" EntitySet="Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Usuario_Pessoa" Association="Self.fk_Usuario_Pessoa">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -170,40 +168,39 @@
           <EntitySetMapping Name="Pessoa">
             <EntityTypeMapping TypeName="dbTodaHoraModel.Pessoa">
               <MappingFragment StoreEntitySet="Pessoa">
-                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
-                <ScalarProperty Name="Sexo_Id" ColumnName="Sexo_Id" />
-                <ScalarProperty Name="Cpf" ColumnName="Cpf" />
-                <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
-                <ScalarProperty Name="Sobrenome" ColumnName="Sobrenome" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Pessoa_Id" ColumnName="Pessoa_Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Sobrenome" ColumnName="Sobrenome" />
+                <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+                <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+                <ScalarProperty Name="Sexo_Id" ColumnName="Sexo_Id" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sexo">
             <EntityTypeMapping TypeName="dbTodaHoraModel.Sexo">
               <MappingFragment StoreEntitySet="Sexo">
-                <ScalarProperty Name="blnAtivo" ColumnName="blnAtivo" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Sexo_Id" ColumnName="Sexo_Id" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="blnAtivo" ColumnName="blnAtivo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="dbTodaHoraModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="Created_By_Id" ColumnName="Created_By_Id" />
-                <ScalarProperty Name="Created_By_UserName" ColumnName="Created_By_UserName" />
-                <ScalarProperty Name="Created_On" ColumnName="Created_On" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Pessoa_Id" ColumnName="Pessoa_Id" />
-                <ScalarProperty Name="UsuarioAlteracao" ColumnName="UsuarioAlteracao" />
-                <ScalarProperty Name="Data_alteracao" ColumnName="Data_alteracao" />
-                <ScalarProperty Name="blnAdmin" ColumnName="blnAdmin" />
-                <ScalarProperty Name="blnAtivo" ColumnName="blnAtivo" />
-                <ScalarProperty Name="Senha" ColumnName="Senha" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="blnAtivo" ColumnName="blnAtivo" />
+                <ScalarProperty Name="blnAdmin" ColumnName="blnAdmin" />
+                <ScalarProperty Name="DataAlteracao" ColumnName="DataAlteracao" />
+                <ScalarProperty Name="Pessoa_Id" ColumnName="Pessoa_Id" />
+                <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+                <ScalarProperty Name="Created_By_UserName" ColumnName="Created_By_UserName" />
+                <ScalarProperty Name="Created_By_Id" ColumnName="Created_By_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

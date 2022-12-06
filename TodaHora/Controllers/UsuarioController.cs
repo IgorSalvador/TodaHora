@@ -1,6 +1,7 @@
 ﻿using ClassLibrary_Email;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -22,7 +23,7 @@ namespace TodaHora.Controllers
         {
             LoginCookiesAtual.getCookies();
 
-            if(LoginCookiesAtual.username == string.Empty)
+            if (LoginCookiesAtual.username == string.Empty)
             {
                 return RedirectToAction("Index", "Login");
             }
@@ -121,30 +122,52 @@ namespace TodaHora.Controllers
             {
                 return RedirectToAction("Index", "Usuario"); // Redirecionar para erro
             }
-            
+
         }
 
         public ActionResult SetCredentials(int? id)
         {
 
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             Usuario usuario = dbTodaHora.Usuario.Find(id);
 
             if (usuario == null)
-            {
                 return HttpNotFound();
-            }
 
-            if(usuario.Username == null && usuario.Username == "")
-            {
+
+            if (usuario.Username != null && usuario.Username != "")
                 return RedirectToAction("", "Erro"); //Criar controlador de erro e action para usuário que já fez o primeiro acesso e definiu os dados
-            }
+
 
             return View(usuario);
+        }
+
+        [HttpPost]
+        public ActionResult SetCredentials(int Usuario_Id, string Username, string Senha)
+        {
+            try
+            {
+                Usuario usuario = dbTodaHora.Usuario.Find(Usuario_Id);
+
+                if (usuario == null)
+                    return HttpNotFound();
+
+                usuario.Username = Username;
+                usuario.Senha = Senha;
+
+                dbTodaHora.Entry(usuario).State = EntityState.Modified;
+                dbTodaHora.SaveChanges();
+
+                return RedirectToAction("Index", "Login");
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("Erro", "Erro");
+            }
+
+            
         }
 
         public ActionResult Edit(int? id)
@@ -224,7 +247,7 @@ namespace TodaHora.Controllers
         [HttpPost]
         [AllowAnonymous]
         [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
-        public JsonResult EditUserInfo(int Usuario_Id, string Nome, string Sobrenome, string Telefone,string Username, string Email, int blnAdmin)
+        public JsonResult EditUserInfo(int Usuario_Id, string Nome, string Sobrenome, string Telefone, string Username, string Email, int blnAdmin)
         {
             UserViewModel Usuario = new UserViewModel();
 
@@ -243,7 +266,7 @@ namespace TodaHora.Controllers
                 return Json(true, JsonRequestBehavior.AllowGet);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(ex, JsonRequestBehavior.AllowGet);
             }

@@ -190,7 +190,6 @@
     <Content Include="Content\images\background_login.png" />
     <Content Include="Content\images\cart.png" />
     <Content Include="Content\images\client_logo.svg" />
-    <Content Include="Content\styles\CredentialsScreen.css" />
     <Content Include="Content\styles\LayoutStyle.css" />
     <Content Include="Content\styles\LoginSheet.css" />
     <Content Include="Content\styles\style.css" />
@@ -215,13 +214,6 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\dbTodaHora.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbTodaHora.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\dbTodaHora.edmx.diagram">
-      <DependentUpon>dbTodaHora.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
@@ -242,6 +234,13 @@
     <Content Include="Scripts\bootstrap.esm.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
+    <EntityDeploy Include="Models\dbTodaHora.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbTodaHora.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\dbTodaHora.edmx.diagram">
+      <DependentUpon>dbTodaHora.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery.mask.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

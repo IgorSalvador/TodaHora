@@ -65,8 +65,7 @@ namespace TodaHora.Models.ViewModel
                 var usuario = db.Usuario.Find(UserUpdate.Usuario_Id);
 
                 usuario.blnAtivo = false;
-                usuario.Data_alteracao = DateTime.Now;
-                usuario.UsuarioAlteracao = LoginCookiesAtual.username;
+                usuario.DataAlteracao = DateTime.Now;
 
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
@@ -89,8 +88,7 @@ namespace TodaHora.Models.ViewModel
                 var usuario = db.Usuario.Find(UserUpdate.Usuario_Id);
 
                 usuario.blnAtivo = true;
-                usuario.Data_alteracao = DateTime.Now;
-                usuario.UsuarioAlteracao = LoginCookiesAtual.username;
+                usuario.DataAlteracao = DateTime.Now;
 
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
@@ -119,8 +117,7 @@ namespace TodaHora.Models.ViewModel
                 usuario.Pessoa.Cpf = UserUpdate.Cpf;
                 usuario.Pessoa.Telefone = UserUpdate.Telefone;
                 usuario.Pessoa.Sexo_Id = UserUpdate.Sexo_Id;
-                usuario.Data_alteracao = DateTime.Now;
-                usuario.UsuarioAlteracao = LoginCookiesAtual.username;
+                usuario.DataAlteracao = DateTime.Now;
 
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
@@ -145,8 +142,7 @@ namespace TodaHora.Models.ViewModel
 
                 usuario.Username = UserUpdate.Username;
                 usuario.Email = UserUpdate.Email;
-                usuario.Data_alteracao = DateTime.Now;
-                usuario.UsuarioAlteracao = LoginCookiesAtual.username;
+                usuario.DataAlteracao = DateTime.Now;
 
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
@@ -170,8 +166,7 @@ namespace TodaHora.Models.ViewModel
                 var usuario = db.Usuario.Find(UserUpdate.Usuario_Id);
 
                 usuario.Senha = UserUpdate.Password;
-                usuario.Data_alteracao = DateTime.Now;
-                usuario.UsuarioAlteracao = LoginCookiesAtual.username;
+                usuario.DataAlteracao = DateTime.Now;
 
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();

@@ -7,7 +7,7 @@
     <Property Name="Pessoa_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nome" Type="varchar" MaxLength="100" />
     <Property Name="Sobrenome" Type="varchar" MaxLength="100" />
-    <Property Name="DataNascimento" Type="date" />
+    <Property Name="DataNascimento" Type="datetime" />
     <Property Name="Cpf" Type="varchar" MaxLength="11" />
     <Property Name="Sexo_Id" Type="int" />
     <Property Name="Telefone" Type="varchar" MaxLength="11" />
@@ -27,17 +27,16 @@
     <Property Name="Usuario_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="100" />
     <Property Name="Senha" Type="varchar" MaxLength="200" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
     <Property Name="blnAtivo" Type="bit" Nullable="false" />
     <Property Name="blnAdmin" Type="bit" Nullable="false" />
-    <Property Name="Data_alteracao" Type="datetime" />
-    <Property Name="UsuarioAlteracao" Type="varchar" MaxLength="100" />
+    <Property Name="DataAlteracao" Type="datetime" />
     <Property Name="Pessoa_Id" Type="int" />
-    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Created_On" Type="datetime" />
     <Property Name="Created_By_UserName" Type="varchar" MaxLength="100" />
     <Property Name="Created_By_Id" Type="int" />
   </EntityType>
-  <Association Name="FK__Pessoa__Sexo_Id__286302EC">
+  <Association Name="fk_Pessoa_Sexo">
     <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />
     <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="*" />
     <ReferentialConstraint>
@@ -49,7 +48,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Usuario__Pessoa___29572725">
+  <Association Name="fk_Usuario_Pessoa">
     <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -65,11 +64,11 @@
     <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Pessoa__Sexo_Id__286302EC" Association="Self.FK__Pessoa__Sexo_Id__286302EC">
+    <AssociationSet Name="fk_Pessoa_Sexo" Association="Self.fk_Pessoa_Sexo">
       <End Role="Sexo" EntitySet="Sexo" />
       <End Role="Pessoa" EntitySet="Pessoa" />
     </AssociationSet>
-    <AssociationSet Name="FK__Usuario__Pessoa___29572725" Association="Self.FK__Usuario__Pessoa___29572725">
+    <AssociationSet Name="fk_Usuario_Pessoa" Association="Self.fk_Usuario_Pessoa">
       <End Role="Pessoa" EntitySet="Pessoa" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
